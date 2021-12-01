@@ -7,6 +7,8 @@ if(!isset($_GET['option'])) {
 
 $option = $_GET['option'];
 
+include_once "../models/Productos.php";
+
 switch ($option) {
   case 'add':
     Create();

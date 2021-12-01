@@ -17,21 +17,34 @@
 
   <?php include_once "./api/config/config.php" ?>
 
+  <?php include_once "./api/models/database.php" ?>
+  <?php include_once "./api/models/Productos.php" ?>
+
   <?php include_once "./components/header.php" ?>
 
   <?php include_once "./components/banner.php" ?>
 
   <div class="container p-3">
 
-    <div class="card" style="width: 18rem;">
-      <img src="./assets/products/airpods.webp" class="card-img-top" alt="airpods">
-      <div class="card-body">
-        <h5 class="card-title">Toshiba</h5>
-        <p class="card-text">Es Comodo y rapido, 8GB ram.</p>
-        <a href="#" class="btn btn-secondary float-end">
-          Agregar 
-        </a>
-      </div>
+    <?php $reg = new Productos(); ?>
+
+    <div class="row gap-2 justify-content-between">
+
+      <?php foreach ($reg->All() as $row) { ?>
+
+        <div class="card" style="width: 18rem;">
+          <img src="./assets/products/<?php echo $row['Imagen_Producto']; ?>" class="card-img-top" alt="<?php echo $row['Nombre_Producto']; ?>">
+          <div class="card-body">
+            <h5 class="card-title"><?php echo $row['Nombre_Producto']; ?></h5>
+            <p class="card-text"><?php echo $row['Descripcion_Producto']; ?></p>
+            <a href="#" class="btn btn-secondary float-end">
+              Agregar
+            </a>
+          </div>
+        </div>
+
+      <?php } ?>
+
     </div>
 
   </div>
