@@ -4,7 +4,6 @@ class Usuario
 {
   private $db;
   private $table;
-  private $array;
   private $where;
 
   function __construct()
@@ -23,10 +22,10 @@ class Usuario
   }
 
 
-  function Create($product, $CountToSet)
+  function CreateUser($usuario, $CountToSet)
   {
-    $keys = array_keys($product);
-    $values = array_values($product);
+    $keys = array_keys($usuario);
+    $values = array_values($usuario);
     $question = $this->QuestionInterrogation($CountToSet);
 
     $query = "INSERT INTO $this->table ($keys) VALUES ($question)";
@@ -42,11 +41,11 @@ class Usuario
     $this->where = "WHERE $key = $value";
   }
 
-  function Update($product)
+  function Update($usuario)
   {
-    $values = array_values($product);
+    $values = array_values($usuario);
     $mykey = array();
-    foreach ($product as $clave => $value) {
+    foreach ($usuario as $clave => $value) {
       array_push($mykey, "$clave = '$value'");
     }
 

@@ -28,7 +28,7 @@
 
     <?php $reg = new Productos(); ?>
 
-    <div class="row gap-2 justify-content-between">
+    <div class="row gap-2 justify-content-between" id="contenido-producto">
 
       <?php foreach ($reg->All() as $row) { ?>
 
@@ -37,7 +37,7 @@
           <div class="card-body">
             <h5 class="card-title"><?php echo $row['Nombre_Producto']; ?></h5>
             <p class="card-text"><?php echo $row['Descripcion_Producto']; ?></p>
-            <a href="#" class="btn btn-secondary float-end">
+            <a href="#" data-id="<?php echo $row['ID_Producto']; ?>" class="btn btn-secondary float-end">
               Agregar
             </a>
           </div>
@@ -53,3 +53,14 @@
 </body>
 
 </html>
+
+<script>
+  const contenidoProducto = document.getElementById('contenido-producto');
+  
+  const handleClick = (ev)=>{
+    
+  }
+
+  contenidoProducto.addEventListener('click',handleClick)
+
+</script>
