@@ -11,12 +11,26 @@
   <title>Login</title>
 </head>
 <body>
-    <main>
-        <div >
-            <h1>hola</h1>
+  <?php include_once "../../components/header.php" ?>
 
+    <div class="container">
+        <div class="card" style="margin: 5%;">
+            <h1 style="text-align:center">Resumen de Compra</h1>
+            <div class="card-body">
+                <div style="display:flex;"><img style="width: 50%;" src="../../assets/products/airpods.webp" alt="" class="card-img-top"> 
+                    <div class="card-title">
+                        <h3>Audifonos</h3>  
+                        <p style="margin: 70px 0;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque neque optio, maiores culpa sed repellendus architecto nobis aliquid eligendi, voluptatibus veritatis nulla laudantium excepturi tempore obcaecati inventore adipisci reprehenderit facilis.</p>
+                        <strong>Precio: S/ 190.00</strong>
+                    </div>
+                </div>
+                <div style="display: flex;justify-content: flex-end;">
+                    <button class="btn btn-dark">Finalizar Compra</button>
+                </div>
+
+            </div>
         </div>
-    </main>
+</div>
     
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
