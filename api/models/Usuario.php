@@ -18,13 +18,13 @@ class Usuario
     for ($i = 0; $i < $count; $i++) {
       array_push($array, '?');
     }
-    return $array;
+    return implode(',',$array);
   }
 
 
   function CreateUser($usuario, $CountToSet)
   {
-    $keys = array_keys($usuario);
+    $keys = implode(',',array_keys($usuario));
     $values = array_values($usuario);
     $question = $this->QuestionInterrogation($CountToSet);
 
