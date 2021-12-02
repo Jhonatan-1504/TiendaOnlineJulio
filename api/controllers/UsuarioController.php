@@ -42,8 +42,8 @@ function CrearNuevoUsuario()
   $request = json_decode(file_get_contents("php://input"));
 
   $datos = [
-    "Contraseña_Usuario" => $request->password,
-    "Nombre_Usuario" => $request->nameUser
+    "Contrasena_Usuario" => $request->password,
+    "Email_Usuario" => $request->nameUser
   ];
 
   $reg = new Usuario();
@@ -67,10 +67,10 @@ function ActualizarPassword()
 {
   $request = json_decode(file_get_contents("php://input"));
 
-  $datos = [ "Contraseña_Usuario" => $request->password];
+  $datos = [ "Contrasena_Usuario" => $request->password];
 
   $reg = new Usuario();
-  $reg->Where(["Nombre_Usuario"=>$request->email]);
+  $reg->Where(["Email_Usuario"=>$request->email]);
   $result = $reg->UpdateUser($datos);
 
   if($result){

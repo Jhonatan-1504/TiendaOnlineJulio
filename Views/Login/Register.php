@@ -19,9 +19,9 @@
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
         <div class="card bg-dark text-white" style="border-radius: 1rem;">
           <div class="card-body p-5 text-center">
-
+          <form action="" method="post">
             <div class="mb-md-1 mt-md-1 ">
-
+      
               <h2 class="fw-bold mb-2 text-uppercase">Registro</h2>
               <p class="text-white-50 mb-5">Por favor introduce tus datos!</p>
 
@@ -51,7 +51,7 @@
             <div>
               <p class="mb-0">Ya tienes una cuenta? <a href="#!" class="text-white-50 fw-bold">Inicia sesión</a></p>
             </div>
-
+            </form>
           </div>
         </div>
       </div>
