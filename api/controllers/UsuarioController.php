@@ -1,12 +1,13 @@
 <?php
 
-if(!isset($_GET['option'])) {
+if (!isset($_GET['option'])) {
   echo "<h1>No tienes permitido entrar a esta pagina</h1> <a href='http://localhost/TiendaOnlineJulio/'>Volver al Menu</a>";
   die();
 }
 
 $option = $_GET['option'];
 
+include_once "../config/config.php";
 include_once "../models/database.php";
 include_once "../models/Usuario.php";
 
@@ -25,32 +26,39 @@ switch ($option) {
     break;
 }
 
-// path "./api/controllers/UsuarioController.php?option=list"
+/*
+http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=addUser
+
+{
+    "nameUser":"PincheENZO",
+    "password":"123"
+}
+*/
 
 function Create()
 {
-  if(!isset($_POST)) {
+  if (!isset($_POST)) {
     echo "No hay datos asignados";
     die();
   }
 
+  $request = json_decode(file_get_contents("php://input"));
+
   $datos = [
-    "Contraseña_Usuario"=>$_POST['Contraseña_Usuario'],
-    "Nombre_Usuario"=>$_POST['Nombre_Usuario'],
-    "Apellido_Usuario"=>$_POST['Apellido_Usuario'],
+    "Contraseña_Usuario" => $request->password,
+    "Nombre_Usuario" => $request->nameUser
   ];
 
   $reg = new Usuario();
-  $result = $reg->CreateUser($datos,3);
+  $result = $reg->CreateUser($datos, 2);
 
-  if($result>0) {
+  if ($result > 0) {
     $_SESSION['msg'] = "Registrado correctamente";
   };
 }
 
 function Update()
 {
-
 }
 
 function Deletes()
