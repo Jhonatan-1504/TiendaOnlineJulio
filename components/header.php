@@ -14,8 +14,8 @@
         </li>
       </ul>
       <div class="d-flex flex-row-reverse">
-        <img src="./assets/usuario.svg" class="set-image m-3" alt="icono usuario">
-        <img src="./assets/carrito.svg" class="set-image m-3" alt="icono carrito">
+        <img src="<?php echo constant('URL'); ?>/assets/usuario.svg" class="set-image m-3" alt="icono usuario">
+        <img src="<?php echo constant('URL'); ?>/assets/carrito.svg" class="set-image m-3" alt="icono carrito">
       </div>
     </div>
   </div>
