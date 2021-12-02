@@ -5,6 +5,11 @@ if (!isset($_GET['option'])) {
   die();
 }
 
+if (!isset($_POST)) {
+  echo "No hay datos asignados";
+  die();
+}
+
 $option = $_GET['option'];
 
 include_once "../config/config.php";
@@ -13,19 +18,17 @@ include_once "../models/Usuario.php";
 
 switch ($option) {
   case 'addUser':
-    Create();
+    CrearNuevoUsuario();
     break;
-  case "edit":
-    Edit();
+  case "updatePassword":
+    ActualizarPassword();
     break;
-  case "update":
-    Update();
-    break;
-  case "delete":
-    Deletes();
+  case "deleteUser":
+    BorraCuenta();
     break;
 }
 
+// HTTP_POST
 /*
 http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=addUser
 
@@ -34,14 +37,8 @@ http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=
     "password":"123"
 }
 */
-
-function Create()
+function CrearNuevoUsuario()
 {
-  if (!isset($_POST)) {
-    echo "No hay datos asignados";
-    die();
-  }
-
   $request = json_decode(file_get_contents("php://input"));
 
   $datos = [
@@ -52,19 +49,49 @@ function Create()
   $reg = new Usuario();
   $result = $reg->CreateUser($datos, 2);
 
-  if ($result > 0) {
-    $_SESSION['msg'] = "Registrado correctamente";
+  if ($result) {
+    echo "Registrado correctamente";
   };
 }
 
-function Update()
+// HTTP_POST
+/*
+http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=updatePassword
+
+  {
+    "email":"pINCHEeNZO",
+    "password":"12345678"
+  }
+*/
+function ActualizarPassword()
 {
+  $request = json_decode(file_get_contents("php://input"));
+
+  $datos = [ "Contraseña_Usuario" => $request->password];
+
+  $reg = new Usuario();
+  $reg->Where(["Nombre_Usuario"=>$request->email]);
+  $result = $reg->UpdateUser($datos);
+
+  if($result){
+    echo "Actualizado con exito";
+  }
 }
 
-function Deletes()
-{
-}
+// HTTP_GET
+/*
+http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=deleteUser&id=1
+*/
 
-function Edit()
+function BorraCuenta()
 {
+  $reg = new Usuario();
+
+  $reg->Where(["ID_Usuario"=>$_GET['id']]);
+  $result = $reg->DeleteUser();
+
+  if($result){
+    echo "Borrado con exito";
+  }
+
 }
