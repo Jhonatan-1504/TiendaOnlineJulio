@@ -37,9 +37,13 @@
           <div class="card-body">
             <h5 class="card-title"><?php echo $row['Nombre_Producto']; ?></h5>
             <p class="card-text"><?php echo $row['Descripcion_Producto']; ?></p>
-            <a href="#" data-id="<?php echo $row['ID_Producto']; ?>" class="btn btn-secondary float-end">
-              Agregar
-            </a>
+
+            <div class="d-flex justify-content-between">
+              <h4 class="card-text float-end">S/.<?php echo $row['Precio_Producto']; ?></h4>
+              <button href="#" data-id="<?php echo $row['ID_Producto']; ?>" class="btn btn-secondary float-end">
+                Agregar
+              </button>
+            </div>
           </div>
         </div>
 
@@ -56,11 +60,13 @@
 
 <script>
   const contenidoProducto = document.getElementById('contenido-producto');
-  
-  const handleClick = (ev)=>{
-    
+
+  const handleClick = (ev) => {
+    if (ev.target.classList.contains('btn-secondary')) {
+      console.log(ev.target.dataset)
+    }
+    ev.stopPropagation();
   }
 
-  contenidoProducto.addEventListener('click',handleClick)
-
+  contenidoProducto.addEventListener('click', handleClick)
 </script>
