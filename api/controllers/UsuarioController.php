@@ -23,6 +23,9 @@ switch ($option) {
   case "updatePassword":
     ActualizarPassword();
     break;
+  case "updateAllData":
+    ActualizarAll();
+    break;
   case "deleteUser":
     BorraCuenta();
     break;
@@ -67,13 +70,46 @@ function ActualizarPassword()
 {
   $request = json_decode(file_get_contents("php://input"));
 
-  $datos = [ "Contrasena_Usuario" => $request->password];
+  $datos = ["Contrasena_Usuario" => $request->password];
 
   $reg = new Usuario();
-  $reg->Where(["Email_Usuario"=>$request->email]);
+  $reg->Where(["Email_Usuario" => $request->email]);
   $result = $reg->UpdateUser($datos);
 
-  if($result){
+  if ($result) {
+    echo "Actualizado con exito";
+  }
+}
+
+// HTTP_POST
+/*
+http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=updateAllData&id=1
+
+  {
+    "dni":"87456321",
+    "correo":"PincheEnzo@gmail.com",
+    "nombre":"Piña",
+    "apellido":"Enzo",
+    "telefono":"987456321"
+  }
+*/
+function ActualizarAll()
+{
+  $request = json_decode(file_get_contents("php://input"));
+
+  $datos = [
+    "DNI_Usuario" => $request->dni,
+    "Email_Usuario" => $request->correo,
+    "Nombres_Usuario" => $request->nombre,
+    "Apellidos_Usuario" => $request->apellido,
+    "Telefono_Usuario" => $request->telefono
+  ];
+
+  $reg = new Usuario();
+  $reg->Where(["ID_Usuario" => $_GET['id']]);
+  $result = $reg->UpdateUser($datos);
+
+  if ($result) {
     echo "Actualizado con exito";
   }
 }
@@ -87,11 +123,10 @@ function BorraCuenta()
 {
   $reg = new Usuario();
 
-  $reg->Where(["ID_Usuario"=>$_GET['id']]);
+  $reg->Where(["ID_Usuario" => $_GET['id']]);
   $result = $reg->DeleteUser();
 
-  if($result){
+  if ($result) {
     echo "Borrado con exito";
   }
-
 }
