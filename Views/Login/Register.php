@@ -19,7 +19,7 @@
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
         <div class="card bg-dark text-white" style="border-radius: 1rem;">
           <div class="card-body p-5 text-center">
-          <!-- <form action="http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=addUser" method="post"> -->
+          <form id="formRegister">
             <div class="mb-md-1 mt-md-1 ">
       
               <h2 class="fw-bold mb-2 text-uppercase">Registro</h2>
@@ -33,25 +33,28 @@
 
               <div class="form-outline form-white mb-4">
               <label class="form-label" for="typePasswordX">Contraseña:</label>
-                <input name="password" type="password" id="typePasswordX" class="form-control form-control-lg" required/>
+                <input minlength="6" name="password" type="password" id="typePasswordX" class="form-control form-control-lg" required/>
                
               </div>
 
               <div class="form-outline form-white mb-4">
               <label class="form-label" for="typeRecuperarContraseña">Confirma Contraseña:</label>
-                <input type="password" id="typeRecuperarContraseña" class="form-control form-control-lg" required />
+                <input minlength="6" type="password" id="typeRecuperarContraseña" class="form-control form-control-lg" required />
                
               </div>
 
-              <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Se te olvidó tu contraseña?</a></p>
+              <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="../Login/RePassword.php">Se te olvidó tu contraseña?</a></p>
 
               <button class="btn btn-outline-light btn-lg px-5  m-2" id="submit" type="submit">Guardar</button>
             </div>
 
             <div>
-              <p class="mb-0">Ya tienes una cuenta? <a href="#!" class="text-white-50 fw-bold">Inicia sesión</a></p>
+              <p class="mb-0">Ya tienes una cuenta? <a href="../Login/Login.php" class="text-white-50 fw-bold">Inicia sesión</a></p>
             </div>
-            <!-- </form> -->
+                          <div id="mesa-war" class="alert alert-danger d-none m-3" role="alert">
+                Las contraseñas no son las mismas
+                          </div>
+            </form>
           </div>
         </div>
       </div>
@@ -62,11 +65,27 @@
 
   <script>
     
-    const valor = document.getElementById("submit");
-    valor.addEventListener("click",modifyText)
-    function modifyText() {
-      //if(typePasswordX ==)
-      console.log(porId);
+    const Form = document.getElementById("formRegister");
+    Form.addEventListener("submit",HandleSubmit)
+
+  async function HandleSubmit(event){
+    event.preventDefault();
+    let Iscorrect = Validate();
+    if(Iscorrect){
+        let MisDatos = new FormData(Form);
+        await fetch('http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=addUser',{method:"POST",body:MisDatos});
+        window.location.href = "../../index.php";
+    }else{
+      const mesaWar = document.getElementById("mesa-war");
+      mesaWar.classList.remove("d-none");
+    }
+  }
+
+    function Validate() {
+      const valorpass = document.getElementById("typePasswordX").value;
+      const valorRpass = document.getElementById("typeRecuperarContraseña").value;
+      if(valorpass === valorRpass)return true;
+      else false;
   }
     
     
