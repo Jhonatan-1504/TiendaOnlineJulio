@@ -5,7 +5,7 @@ class Productos
   private $db;
   private $table;
   private $array;
-  private $where;
+  private $where = '';
 
   function __construct()
   {
@@ -24,7 +24,7 @@ class Productos
 
   function All()
   {
-    $query = "SELECT * FROM $this->table";
+    $query = "SELECT * FROM $this->table $this->where";
     $sentence = $this->db->connect()->query($query);
     $sentence->execute();
 
