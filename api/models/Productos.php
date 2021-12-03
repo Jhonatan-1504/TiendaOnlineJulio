@@ -19,7 +19,7 @@ class Productos
     for ($i = 0; $i < $count; $i++) {
       array_push($array, '?');
     }
-    return $array;
+    return implode(',', $array);
   }
 
   function All()
@@ -37,7 +37,7 @@ class Productos
 
   function Create($product, $CountToSet)
   {
-    $keys = array_keys($product);
+    $keys = implode(',', array_keys($product));
     $values = array_values($product);
     $question = $this->QuestionInterrogation($CountToSet);
 
@@ -50,13 +50,12 @@ class Productos
 
   function Where($condicional){
     $key = key($condicional);
-    $value = key($condicional);
-    $this->where = "WHERE $key = $value";
+    $value = $condicional[$key];
+    $this->where = "WHERE $key = '$value'";
   }
 
   function Update($product)
   {
-    $values = array_values($product);
     $mykey = array();
     foreach ($product as $clave => $value) {
       array_push($mykey, "$clave = '$value'");
@@ -64,7 +63,7 @@ class Productos
 
     $query = "UPDATE $this->table SET " . implode(',', $mykey) . " $this->where";
     $result = $this->db->connect()->prepare($query);
-    $result->execute($values);
+    $result->execute();
 
     return $result;
   }
