@@ -35,14 +35,20 @@ switch ($option) {
 }
 
 
-// HTTP_GET
+// HTTP_POST
 /*
-http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=verificar&email=PincheENZO&password=123
+http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=verificar
+{
+  "email":'PincheENZO',
+  "password":'12345'
+}
 */
 function VerificarUsuario()
 {
+  $request = json_decode(json_encode($_POST));
+
   $reg = new Usuario();
-  $reg->Verification($_GET['email'], $_GET['password']);
+  $reg->Verification($request->email, $request->password);
   $user = $reg->All();
   if ($user !== null) {
     http_response_code(200);
@@ -99,9 +105,9 @@ function ActualizarPassword()
   $reg->Where(["Email_Usuario" => $request->email]);
   $user = $reg->All();
 
-  if($user===null){
+  if ($user === null) {
     http_response_code(404);
-    echo json_encode(["msg"=>"Correo no existe"]);
+    echo json_encode(["msg" => "Correo no existe"]);
     die();
   }
 
