@@ -18,12 +18,12 @@
     <div class="container">
         <div class="card" style="margin: 5%;">
             <div class="card-body">
-                <div style="display:flex;flex-direction: column;">
-                    <div style="text-align: center;">
+                <div class="row">
+                    <div class="col-md" style="text-align: center;">
                         <h2><strong id="nombre_producto"></strong></h2>  
                         <img id="imagen_producto" style="width: 40%"  alt="" class="card-img-top"/> 
                     </div>
-                    <div style="width: 100%;margin: 20px 0;">
+                    <div class="col-md" style="width: 100%;margin: 20px 0;">
                         <div class="accordion" id="accordionPanelsStayOpenExample">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
