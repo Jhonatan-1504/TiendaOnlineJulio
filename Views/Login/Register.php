@@ -52,7 +52,7 @@
               <p class="mb-0">Ya tienes una cuenta? <a href="../Login/Login.php" class="text-white-50 fw-bold">Inicia sesión</a></p>
             </div>
                           <div id="mesa-war" class="alert alert-danger d-none m-3" role="alert">
-                Las contraseñas no son las mismas
+                Las contraseñas no son las mismas!
                           </div>
             </form>
           </div>
