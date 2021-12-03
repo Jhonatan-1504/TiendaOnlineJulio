@@ -23,7 +23,7 @@ function ShowMessageCarrito() {
 }
 
 const handleClick = () =>{
-  
+  console.log('pinche enzo');
 }
 
 addButton.addEventListener('click',handleClick)
