@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="<?php echo constant('URL'); ?>/assets/styles.css">
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Tienda Online</a>
