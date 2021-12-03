@@ -10,7 +10,6 @@
   <title>Producto</title>
 </head>
 <body>
-<?php echo dirname(__FILE__); ?>
 
   <?php include_once "../../components/header.php" ?>
 
