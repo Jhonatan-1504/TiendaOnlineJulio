@@ -42,7 +42,7 @@ http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=
 */
 function CrearNuevoUsuario()
 {
-  $request = json_decode(file_get_contents("php://input"));
+  $request = json_decode(json_encode($_POST));
 
   $datos = [
     "Contrasena_Usuario" => $request->password,
