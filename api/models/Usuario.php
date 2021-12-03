@@ -5,6 +5,8 @@ class Usuario
   private $db;
   private $table;
   private $where;
+  private $array;
+  private $select = "*";
 
   function __construct()
   {
@@ -21,6 +23,22 @@ class Usuario
     return implode(',', $array);
   }
 
+  function Select(array $array){
+    $this->select = implode(',',$array);
+  }
+
+  function All()
+  {
+    $query = "SELECT $this->select FROM $this->table $this->where";
+    $sentence = $this->db->connect()->query($query);
+    $sentence->execute();
+
+    while ($row = $sentence->fetch(PDO::FETCH_ASSOC)) {
+      $this->array[] = $row;
+    }
+
+    return $this->array;
+  }
 
   function CreateUser($usuario, $CountToSet)
   {
@@ -33,6 +51,10 @@ class Usuario
     $result->execute($values);
 
     return $result;
+  }
+
+  function Verification(string $username,string $password){
+    $this->where = "WHERE Email_Usuario='$username' AND Contrasena_Usuario='$password'";
   }
 
   function Where($condicional)

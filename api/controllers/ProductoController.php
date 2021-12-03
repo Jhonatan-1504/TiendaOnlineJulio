@@ -41,7 +41,7 @@ function BuscarProductoId()
 {
   $reg = new Productos();
   $reg->Where(['ID_Producto' => $_GET['idProducto']]);
-  echo json_encode($reg->All());
+  echo json_encode($reg->All()[0]);
 }
 
 // HTTP_POST
