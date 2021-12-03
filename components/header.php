@@ -14,8 +14,15 @@
         </li>
       </ul>
       <div class="d-flex flex-row-reverse">
-        <img src="<?php echo constant('URL'); ?>/assets/usuario.svg" class="set-image m-3" alt="icono usuario">
-        <img src="<?php echo constant('URL'); ?>/assets/carrito.svg" class="set-image m-3" alt="icono carrito">
+        <div>
+          <img src="<?php echo constant('URL'); ?>/assets/usuario.svg" class="set-image m-3" alt="icono usuario">
+        </div>
+        <div class="position-relative mt-3">
+          <img src="<?php echo constant('URL'); ?>/assets/carrito.svg" class="set-image" alt="icono carrito">
+          <span id="contador-carrito" class="visually-hidden position-absolute top-25 start-100 translate-middle badge rounded-pill bg-danger">
+            0
+          </span>
+        </div>
       </div>
     </div>
   </div>

@@ -40,7 +40,7 @@
 
             <div class="d-flex justify-content-between">
               <h4 class="card-text float-end">S/.<?php echo $row['Precio_Producto']; ?></h4>
-              <button href="#" data-id="<?php echo $row['ID_Producto']; ?>" class="btn btn-secondary float-end">
+              <button href="#" data-description="<?php echo $row['Descripcion_Producto']; ?>" data-price="<?php echo $row['Precio_Producto']; ?>" data-name="<?php echo $row['Nombre_Producto']; ?>" data-img="<?php echo $row['Imagen_Producto']; ?>" data-id="<?php echo $row['ID_Producto']; ?>" class="btn btn-secondary float-end">
                 Agregar
               </button>
             </div>
@@ -60,10 +60,49 @@
 
 <script>
   const contenidoProducto = document.getElementById('contenido-producto');
+  const contadorCarrito = document.getElementById('contador-carrito');
+
+  const LocalCarrito = getCarrito();
+
+  ShowMessageCarrito()
+
+  function ShowMessageCarrito() {
+    if (LocalCarrito.length) {
+      contadorCarrito.classList.remove('visually-hidden')
+      contadorCarrito.textContent = LocalCarrito.length;
+    }
+  }
+
+  function getCarrito() {
+    let local = localStorage.getItem('carrito');
+    return local !== null ? [...JSON.parse(local)] : [];
+  }
+
+  function setCarrito() {
+    localStorage.setItem('carrito', JSON.stringify(LocalCarrito));
+  }
+
+  function isExists(id) {
+    return LocalCarrito.filter(carrito => carrito.id === id).length
+  }
 
   const handleClick = (ev) => {
     if (ev.target.classList.contains('btn-secondary')) {
-      console.log(ev.target.dataset)
+      const object = {
+        id: ev.target.dataset.id,
+        name: ev.target.dataset.name,
+        description: ev.target.dataset.description,
+        price: ev.target.dataset.price,
+        img: ev.target.dataset.img,
+      }
+
+      if (isExists(object.id)) {
+        console.log('no c puede agregar algo ya existente');
+      } else {
+        LocalCarrito.push(object);
+        setCarrito();
+        ShowMessageCarrito();
+      }
     }
     ev.stopPropagation();
   }
