@@ -17,6 +17,9 @@ include_once "../models/database.php";
 include_once "../models/Usuario.php";
 
 switch ($option) {
+  case 'verificar':
+    VerificarUsuario();
+    break;
   case 'addUser':
     CrearNuevoUsuario();
     break;
@@ -29,6 +32,23 @@ switch ($option) {
   case "deleteUser":
     BorraCuenta();
     break;
+}
+
+
+// HTTP_GET
+/*
+http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=verificar&email=PincheENZO&password=123
+*/
+function VerificarUsuario()
+{
+  $reg = new Usuario();
+  $reg->Verification($_GET['email'], $_GET['password']);
+  $user = $reg->All();
+  if($user!==null){
+    echo json_encode($user);
+  }else{
+    echo json_encode(['msg'=>'No existe']);
+  }
 }
 
 // HTTP_POST
@@ -68,7 +88,7 @@ http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=
 */
 function ActualizarPassword()
 {
-  $request = json_decode(file_get_contents("php://input"));
+  $request = json_decode(json_encode($_POST));
 
   $datos = ["Contrasena_Usuario" => $request->password];
 
