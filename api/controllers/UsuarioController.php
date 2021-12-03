@@ -44,10 +44,10 @@ function VerificarUsuario()
   $reg = new Usuario();
   $reg->Verification($_GET['email'], $_GET['password']);
   $user = $reg->All();
-  if($user!==null){
+  if ($user !== null) {
     echo json_encode($user);
-  }else{
-    echo json_encode(['msg'=>'No existe']);
+  } else {
+    echo json_encode(['msg' => 'No existe']);
   }
 }
 
@@ -93,7 +93,17 @@ function ActualizarPassword()
   $datos = ["Contrasena_Usuario" => $request->password];
 
   $reg = new Usuario();
+  $reg->Select(["ID_Usuario"]);
   $reg->Where(["Email_Usuario" => $request->email]);
+  $user = $reg->All();
+
+  if($user===null){
+    http_response_code(404);
+    echo json_encode(["msg"=>"Correo no existe"]);
+    die();
+  }
+
+  http_response_code(200);
   $result = $reg->UpdateUser($datos);
 
   if ($result) {

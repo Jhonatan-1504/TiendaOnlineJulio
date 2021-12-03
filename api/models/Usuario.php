@@ -6,6 +6,7 @@ class Usuario
   private $table;
   private $where;
   private $array;
+  private $select = "*";
 
   function __construct()
   {
@@ -22,9 +23,13 @@ class Usuario
     return implode(',', $array);
   }
 
+  function Select(array $array){
+    $this->select = implode(',',$array);
+  }
+
   function All()
   {
-    $query = "SELECT * FROM $this->table $this->where";
+    $query = "SELECT $this->select FROM $this->table $this->where";
     $sentence = $this->db->connect()->query($query);
     $sentence->execute();
 
