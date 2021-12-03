@@ -8,14 +8,11 @@
   <meta name="description" content="La mejor tienda online improvisada en 10 horas">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <title>Tienda online Julio</title>
+  <script defer src="./assets/js/carrito.js"></script>
 </head>
 
 <body>
-
-  <!-- <?php if (isset($_SESSION['usurio']))  ?> -->
-
   <?php include_once "./api/config/config.php" ?>
-
   <?php include_once "./api/models/database.php" ?>
   <?php include_once "./api/models/Productos.php" ?>
 
@@ -71,25 +68,3 @@
 </body>
 
 </html>
-
-<script>
-  const contenidoProducto = document.getElementById('contenido-producto');
-  const contadorCarrito = document.getElementById('contador-carrito');
-
-  const LocalCarrito = getCarrito();
-
-  ShowMessageCarrito()
-
-  function getCarrito() {
-    let local = localStorage.getItem('carrito');
-    return local !== null ? [...JSON.parse(local)] : [];
-  }
-
-  function ShowMessageCarrito() {
-    if (LocalCarrito.length) {
-      contadorCarrito.classList.remove('visually-hidden')
-      contadorCarrito.textContent = LocalCarrito.length;
-    }
-  }
-
-</script>
