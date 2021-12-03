@@ -19,6 +19,9 @@ include_once "../models/database.php";
 include_once "../models/Productos.php";
 
 switch ($option) {
+  case "editProduct":
+    BuscarProductoId();
+    break;
   case 'addProduct':
     CrearProducto();
     break;
@@ -30,6 +33,16 @@ switch ($option) {
     break;
 }
 
+// HTTP_GET
+/*
+  http://localhost/TiendaOnlineJulio/api/controllers/ProductoController.php?option=editProduct&idProducto=1
+*/
+function BuscarProductoId()
+{
+  $reg = new Productos();
+  $reg->Where(['ID_Producto' => $_GET['idProducto']]);
+  echo json_encode($reg->All());
+}
 
 // HTTP_POST
 /*

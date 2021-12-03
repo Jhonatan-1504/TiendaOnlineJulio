@@ -40,9 +40,9 @@
 
             <div class="d-flex justify-content-between">
               <h4 class="card-text float-end">S/.<?php echo $row['Precio_Producto']; ?></h4>
-              <button href="#" data-description="<?php echo $row['Descripcion_Producto']; ?>" data-price="<?php echo $row['Precio_Producto']; ?>" data-name="<?php echo $row['Nombre_Producto']; ?>" data-img="<?php echo $row['Imagen_Producto']; ?>" data-id="<?php echo $row['ID_Producto']; ?>" class="btn btn-secondary float-end">
+              <a href=" ./Views/producto/Producto.php?idProducto=<?php echo $row['ID_Producto']; ?>" class="btn btn-secondary float-end">
                 Agregar
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -51,6 +51,21 @@
 
     </div>
 
+  </div>
+  
+  <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <img src="..." class="rounded me-2" alt="...">
+        <strong class="me-auto">Bootstrap</strong>
+        <small>11 mins ago</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        Hello, world! This is a toast message.
+      </div>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -73,39 +88,4 @@
     }
   }
 
-  function getCarrito() {
-    let local = localStorage.getItem('carrito');
-    return local !== null ? [...JSON.parse(local)] : [];
-  }
-
-  function setCarrito() {
-    localStorage.setItem('carrito', JSON.stringify(LocalCarrito));
-  }
-
-  function isExists(id) {
-    return LocalCarrito.filter(carrito => carrito.id === id).length
-  }
-
-  const handleClick = (ev) => {
-    if (ev.target.classList.contains('btn-secondary')) {
-      const object = {
-        id: ev.target.dataset.id,
-        name: ev.target.dataset.name,
-        description: ev.target.dataset.description,
-        price: ev.target.dataset.price,
-        img: ev.target.dataset.img,
-      }
-
-      if (isExists(object.id)) {
-        console.log('no c puede agregar algo ya existente');
-      } else {
-        LocalCarrito.push(object);
-        setCarrito();
-        ShowMessageCarrito();
-      }
-    }
-    ev.stopPropagation();
-  }
-
-  contenidoProducto.addEventListener('click', handleClick)
 </script>
