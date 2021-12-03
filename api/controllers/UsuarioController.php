@@ -45,8 +45,10 @@ function VerificarUsuario()
   $reg->Verification($_GET['email'], $_GET['password']);
   $user = $reg->All();
   if ($user !== null) {
+    http_response_code(200);
     echo json_encode($user);
   } else {
+    http_response_code(404);
     echo json_encode(['msg' => 'No existe']);
   }
 }
