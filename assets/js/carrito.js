@@ -26,4 +26,6 @@ const handleClick = () =>{
   console.log('pinche enzo');
 }
 
-addButton.addEventListener('click',handleClick)
+if(addButton){
+  addButton.addEventListener('click',handleClick)
+}
