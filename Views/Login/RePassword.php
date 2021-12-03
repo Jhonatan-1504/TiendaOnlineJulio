@@ -36,27 +36,28 @@
 
                                     <div class="form-outline form-white mb-4">
                                         <label class="form-label" for="typePasswordX">Nueva Contraseña:</label>
-                                        <input name="password" type="password" id="typePasswordX"
+                                        <input minlength="6" name="password" type="password" id="typePasswordX"
                                             class="form-control form-control-lg" required />
 
                                     </div>
 
-                                    <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Registrate !!</a>
+                                    <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="../Login/Register.php">Registrate !!</a>
                                     </p>
 
                                     <button class="btn btn-outline-light btn-lg px-5  m-2" id="submit"
                                         type="submit">Guardar</button>
                                 </div>
                                 <div>
-                                    <p class="mb-0">Ya tienes una cuenta? <a href="#!"
+                                    <p class="mb-0">Ya tienes una cuenta? <a href="../Login/Login.php"
                                             class="text-white-50 fw-bold">Inicia sesión</a></p>
                                 </div>
+                                <div id="mesa-war" class="alert alert-danger d-none m-3" role="alert">
+                        Los Datos no son Validos!
+                    </div>
                         </div>
-
+                        
                     </div>
-                    <div id="mesa-war" class="alert alert-danger d-none m-3" role="alert">
-                        Las contraseñas no son las mismas!
-                    </div>
+                    
 
 
                 </div>
@@ -79,13 +80,10 @@
                 method: "POST",
                 body: MisDatos
             });
-        let Datos = await response.json();
-        console.log(Datos);
-        //  if(dato.status != 200){
-        //     const mesaWar = document.getElementById("mesa-war");
-        //     mesaWar.classList.remove("d-none");
-        //  }
-        // window.location.href = "../../index.php";
+         if(response.status != 200){
+            const mesaWar = document.getElementById("mesa-war");
+            mesaWar.classList.remove("d-none");
+         }else return window.location.href = "../../index.php";
 
     }
     </script>
