@@ -166,9 +166,14 @@ function ActualizarAll()
   $reg->Where(["ID_Usuario" => $_GET['id']]);
   $result = $reg->UpdateUser($datos);
 
-  if ($result) {
-    echo "Actualizado con exito";
+  if($result->rowCount()){
+    http_response_code(200);
+    echo json_encode(["msg"=>"Actualizado con exito"]);
+  }else{
+    http_response_code(204);
+    echo json_encode(["msg"=>"No actualizamos nada"]);
   }
+  
 }
 
 // HTTP_GET
