@@ -10,8 +10,6 @@ if (!isset($_POST)) {
   die();
 }
 
-$table = "calero";
-
 $option = $_GET['option'];
 
 include_once "../config/config.php";
