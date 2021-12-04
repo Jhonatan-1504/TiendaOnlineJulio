@@ -17,6 +17,9 @@ include_once "../models/database.php";
 include_once "../models/Usuario.php";
 
 switch ($option) {
+  case "perfil":
+    BuscarIdUsuario();
+  break;
   case 'verificar':
     VerificarUsuario();
     break;
@@ -32,6 +35,22 @@ switch ($option) {
   case "deleteUser":
     BorraCuenta();
     break;
+}
+
+// HTTP_GET
+/*
+http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=perfil&idUser=1
+*/
+function BuscarIdUsuario(){
+  $reg = new Usuario();
+  $reg->Where(["ID_Usuario"=>$_GET['idUser']]);
+  $result = $reg->All();
+  if($result === null){
+    http_response_code(404);
+    echo json_encode(["msg"=>"No existe usuario"]);
+    die();
+  }
+  echo json_encode($result[0]);
 }
 
 

@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="<?php echo constant('URL'); ?>/assets/styles.css">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,7 +17,9 @@
       </ul>
       <div class="d-flex flex-row-reverse">
         <div>
-          <img src="<?php echo constant('URL'); ?>/assets/usuario.svg" class="set-image m-3" alt="icono usuario">
+          <a href="<?php echo constant('URL'); ?>/Views/perfil/perfil.php">
+            <img src="<?php echo constant('URL'); ?>/assets/usuario.svg" class="set-image m-3" alt="icono usuario">
+          </a>
         </div>
         <div class="position-relative mt-3">
           <img src="<?php echo constant('URL'); ?>/assets/carrito.svg" class="set-image" alt="icono carrito">
