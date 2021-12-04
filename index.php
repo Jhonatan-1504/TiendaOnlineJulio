@@ -7,16 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="La mejor tienda online improvisada en 10 horas">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="./assets/styles.css">
   <title>Tienda online Julio</title>
+  <script defer src="./assets/js/carrito.js"></script>
 </head>
 
 <body>
-
-  <!-- <?php if (isset($_SESSION['usurio']))  ?> -->
-
   <?php include_once "./api/config/config.php" ?>
-
   <?php include_once "./api/models/database.php" ?>
   <?php include_once "./api/models/Productos.php" ?>
 
@@ -40,9 +36,9 @@
 
             <div class="d-flex justify-content-between">
               <h4 class="card-text float-end">S/.<?php echo $row['Precio_Producto']; ?></h4>
-              <button href="#" data-id="<?php echo $row['ID_Producto']; ?>" class="btn btn-secondary float-end">
+              <a href=" ./Views/producto/Producto.php?idProducto=<?php echo $row['ID_Producto']; ?>" class="btn btn-secondary float-end">
                 Agregar
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -57,16 +53,3 @@
 </body>
 
 </html>
-
-<script>
-  const contenidoProducto = document.getElementById('contenido-producto');
-
-  const handleClick = (ev) => {
-    if (ev.target.classList.contains('btn-secondary')) {
-      console.log(ev.target.dataset)
-    }
-    ev.stopPropagation();
-  }
-
-  contenidoProducto.addEventListener('click', handleClick)
-</script>

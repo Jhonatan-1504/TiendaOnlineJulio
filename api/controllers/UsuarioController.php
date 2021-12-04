@@ -17,6 +17,9 @@ include_once "../models/database.php";
 include_once "../models/Usuario.php";
 
 switch ($option) {
+  case 'verificar':
+    VerificarUsuario();
+    break;
   case 'addUser':
     CrearNuevoUsuario();
     break;
@@ -31,6 +34,31 @@ switch ($option) {
     break;
 }
 
+
+// HTTP_POST
+/*
+http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=verificar
+{
+  "email":'PincheENZO',
+  "password":'12345'
+}
+*/
+function VerificarUsuario()
+{
+  $request = json_decode(json_encode($_POST));
+
+  $reg = new Usuario();
+  $reg->Verification($request->email, $request->password);
+  $user = $reg->All();
+  if ($user !== null) {
+    http_response_code(200);
+    echo json_encode($user);
+  } else {
+    http_response_code(404);
+    echo json_encode(['msg' => 'No existe']);
+  }
+}
+
 // HTTP_POST
 /*
 http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=addUser
@@ -42,7 +70,7 @@ http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=
 */
 function CrearNuevoUsuario()
 {
-  $request = json_decode(file_get_contents("php://input"));
+  $request = json_decode(json_encode($_POST));
 
   $datos = [
     "Contrasena_Usuario" => $request->password,
@@ -68,12 +96,22 @@ http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=
 */
 function ActualizarPassword()
 {
-  $request = json_decode(file_get_contents("php://input"));
+  $request = json_decode(json_encode($_POST));
 
   $datos = ["Contrasena_Usuario" => $request->password];
 
   $reg = new Usuario();
+  $reg->Select(["ID_Usuario"]);
   $reg->Where(["Email_Usuario" => $request->email]);
+  $user = $reg->All();
+
+  if ($user === null) {
+    http_response_code(404);
+    echo json_encode(["msg" => "Correo no existe"]);
+    die();
+  }
+
+  http_response_code(200);
   $result = $reg->UpdateUser($datos);
 
   if ($result) {

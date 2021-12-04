@@ -1,6 +1,9 @@
+
+<link rel="stylesheet" href="<?php echo constant('URL'); ?>/assets/styles.css">
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Tienda Online</a>
+    <a class="navbar-brand" href="<?php echo constant('URL'); ?>">Tienda Online</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -14,8 +17,15 @@
         </li>
       </ul>
       <div class="d-flex flex-row-reverse">
-        <img src="<?php echo constant('URL'); ?>/assets/usuario.svg" class="set-image m-3" alt="icono usuario">
-        <img src="<?php echo constant('URL'); ?>/assets/carrito.svg" class="set-image m-3" alt="icono carrito">
+        <div>
+          <img src="<?php echo constant('URL'); ?>/assets/usuario.svg" class="set-image m-3" alt="icono usuario">
+        </div>
+        <div class="position-relative mt-3">
+          <img src="<?php echo constant('URL'); ?>/assets/carrito.svg" class="set-image" alt="icono carrito">
+          <span id="contador-carrito" class="visually-hidden position-absolute top-25 start-100 translate-middle badge rounded-pill bg-danger">
+            0
+          </span>
+        </div>
       </div>
     </div>
   </div>
