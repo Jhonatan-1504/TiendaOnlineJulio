@@ -118,7 +118,7 @@ function ActualizarPassword()
 {
   $request = json_decode(json_encode($_POST));
 
-  $datos = ["Contrasena_Empleado" => $request->password];
+  $datos = ["Contraseña_Empleado" => $request->password];
 
   $reg = new Empleado();
   $reg->Select(["ID_Empleado"]);

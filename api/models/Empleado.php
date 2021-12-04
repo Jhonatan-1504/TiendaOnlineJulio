@@ -54,7 +54,7 @@ class Empleado
   }
 
   function Verification(string $username,string $password){
-    $this->where = "WHERE Email_Empleado='$username' AND Contrasena_Empleado='$password'";
+    $this->where = "WHERE Email_Empleado='$username' AND Contraseña_Empleado='$password'";
   }
 
   function Where($condicional)
