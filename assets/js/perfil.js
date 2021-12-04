@@ -119,8 +119,6 @@ const ApiPerfil = async () => {
   const response = await fetch(url);
   const perfil = await response.json();
 
-  console.log(perfil);
-
   renderPerfil(perfil);
 };
 
@@ -131,9 +129,9 @@ const ApiSendPerfil = async (object) => {
     method: "POST",
     body: JSON.stringify(object),
   });
-
-  console.log(response.status);
-
+  if(response.status === 200 ){
+    console.log('Actualizado');
+  }
   EsconderInputs();
   ApiPerfil();
 };
