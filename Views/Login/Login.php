@@ -49,7 +49,9 @@
             <div>
               <p class="mb-0">No tengo una cuenta? <a href="../Login/Register.php" class="text-white-50 fw-bold">Registrate</a></p>
             </div>
-
+            <div id="mesa-war" class="alert alert-danger d-none m-3" role="alert">
+                        Los Datos no son Validos!
+                    </div>
           </div>
         </form>
         </div>
@@ -58,6 +60,25 @@
   </div>
 </section>
     <!--  -->
+    <script>
+    const Form = document.getElementById("formRegister");
+    Form.addEventListener("submit", HandleSubmit)
+
+    async function HandleSubmit(event) {
+        event.preventDefault();
+        let MisDatos = new FormData(Form);
+        let response = await fetch(
+            'http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=verificar', {
+                method: "POST",
+                body: MisDatos
+            });
+         if(response.status != 200){
+            const mesaWar = document.getElementById("mesa-war");
+            mesaWar.classList.remove("d-none");
+         }else return window.location.href = "../../index.php";
+
+    }
+    </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
