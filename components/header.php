@@ -17,15 +17,17 @@
       </ul>
       <div class="d-flex flex-row-reverse">
         <div>
-          <a href="<?php echo constant('URL'); ?>/Views/perfil/perfil.php">
-            <img src="<?php echo constant('URL'); ?>/assets/usuario.svg" class="set-image m-3" alt="icono usuario">
+          <a href="<?php echo constant('URL'); ?>Views/perfil/perfil.php">
+            <img src="<?php echo constant('URL'); ?>assets/usuario.svg" class="set-image m-3" alt="icono usuario">
           </a>
         </div>
         <div class="position-relative mt-3">
-          <img src="<?php echo constant('URL'); ?>/assets/carrito.svg" class="set-image" alt="icono carrito">
-          <span id="contador-carrito" class="visually-hidden position-absolute top-25 start-100 translate-middle badge rounded-pill bg-danger">
-            0
-          </span>
+          <a href="<?php echo constant('URL'); ?>Views/boleta/carrito.php">
+            <img src="<?php echo constant('URL'); ?>assets/carrito.svg" class="set-image" alt="icono carrito">
+            <span id="contador-carrito" class="visually-hidden position-absolute top-25 start-100 translate-middle badge rounded-pill bg-danger">
+              0
+            </span>
+          </a>
         </div>
       </div>
     </div>

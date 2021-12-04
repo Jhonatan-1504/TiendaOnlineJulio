@@ -88,7 +88,7 @@
 
   </div>
 
-  <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
     <div id="liveToast" class="toast bg-secondary" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="toast-header">
         <strong class="me-auto info-msg-user"></strong>
