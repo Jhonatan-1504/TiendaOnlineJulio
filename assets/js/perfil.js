@@ -50,7 +50,7 @@ const renderPerfil = ({
 const Edit = () => {
   sendPerfil.disabled = false;
 
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < inputsAll.length; i++) {
     spanAll[i].classList.add("visually-hidden");
     inputsAll[i].classList.remove("visually-hidden");
   }
@@ -58,7 +58,7 @@ const Edit = () => {
 
 const EsconderInputs = () => {
   sendPerfil.disabled = true;
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < inputsAll.length; i++) {
     inputsAll[i].classList.add("visually-hidden");
     spanAll[i].classList.remove("visually-hidden");
   }
