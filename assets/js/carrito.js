@@ -1,6 +1,8 @@
 const contenidoProducto = document.getElementById("contenido-producto");
 const contadorCarrito = document.getElementById("contador-carrito");
 
+const optionsLinks = document.querySelector("[data-options-links]");
+
 const LocalCarrito = getCarrito();
 
 ShowMessageCarrito();
@@ -38,3 +40,11 @@ const InitLinks = () => {
 InitLinks();
 
 const SessionParams = getSession();
+
+if (SessionParams && SessionParams.hasOwnProperty("ID_Empleado")) {
+  optionsLinks.innerHTML ="<div><button class='btn btn-light' id='btnCloseSession'>Cerrar Session</button></div>";
+  document.querySelector("#btnCloseSession").addEventListener("click", () => {
+    localStorage.removeItem("session");
+    window.location.href = "../../";
+  });
+}

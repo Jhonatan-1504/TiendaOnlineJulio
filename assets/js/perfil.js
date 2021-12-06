@@ -13,6 +13,9 @@ var myToast = bootstrap.Toast.getOrCreateInstance(myToastEl);
 const showUserMSG = document.querySelector(".info-msg-user");
 const infoMessage = document.querySelector(".info-msg-text");
 
+const username = document.querySelector("[data-user-name]");
+const btnSessionClose = document.getElementById("btnCloseSession");
+
 const renderLinkBoleta = (boleta, index) => {
   return `<a href="../boleta/Boleta.php?idBoleta=${boleta.ID_Boleta}&idUser=${boleta.ID_Usuario}&date=${boleta.Fecha_Compra}" class="list-group-item list-group-item-action" aria-current="true">
             <div class="d-flex w-100 justify-content-between">
@@ -21,7 +24,7 @@ const renderLinkBoleta = (boleta, index) => {
             </div>
             <p class="mb-1">Mas detalles.</p>
           </a>`;
-  };
+};
 
 const renderPerfil = ({
   Nombres_Usuario,
@@ -34,7 +37,7 @@ const renderPerfil = ({
     element.textContent = text;
     if (text) {
       badgesAll[index].classList.add("visually-hidden");
-      inputsAll[index].value = text;
+      inputsAll[index].value = text.replace(" ", "");
     }
   };
 
@@ -47,6 +50,11 @@ const renderPerfil = ({
   renderItem(spanAll[2], Telefono_Usuario ? Telefono_Usuario : "", 2);
   renderItem(spanAll[3], Email_Usuario ? Email_Usuario : "", 3);
   showUserMSG.textContent = "Hola, " + Email_Usuario;
+};
+
+const CloseSession = () => {
+  localStorage.removeItem("session");
+  window.location.href = "../../";
 };
 
 const Edit = () => {
@@ -132,6 +140,7 @@ const ApiPerfil = async () => {
   const perfil = await response.json();
 
   renderPerfil(perfil);
+  username.textContent = `Bienvenido: ${perfil.Nombres_Usuario?perfil.Nombres_Usuario:''}, ${perfil.Apellidos_Usuario? perfil.Apellidos_Usuario:''}`
 };
 
 const ApiSendPerfil = async (object) => {
@@ -155,12 +164,13 @@ const ValidacionInputCaracteres = (element, number) => {
     element.value = element.value.slice(0, number);
 };
 
-editPerfil.addEventListener("click", Edit);
-sendPerfil.addEventListener("click", SavePerfil);
-
 inputsAll[1].addEventListener("input", function () {
   ValidacionInputCaracteres(this, 8);
 });
 inputsAll[2].addEventListener("input", function () {
   ValidacionInputCaracteres(this, 9);
 });
+
+editPerfil.addEventListener("click", Edit);
+sendPerfil.addEventListener("click", SavePerfil);
+btnSessionClose.addEventListener("click", CloseSession);

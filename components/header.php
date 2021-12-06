@@ -16,7 +16,7 @@
           <a class="nav-link" href="#"></a>
         </li>
       </ul>
-      <div class="d-flex flex-row-reverse">
+      <div class="d-flex flex-row-reverse" data-options-links>
         <div>
           <a data-checkout-user href="#">
             <img src="<?php echo constant('URL'); ?>assets/usuario.svg" class="set-image m-3" alt="icono usuario">

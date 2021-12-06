@@ -16,6 +16,11 @@
   <?php include_once "../../api/config/config.php"; ?>
   <?php include_once "../../components/header.php" ?>
 
+  <div class="text-white bg-dark p-3 d-flex justify-content-between align-items-center">
+    <h1 data-user-name>Bienvenido, Enzo</h1>
+    <button class="btn btn-secondary" id="btnCloseSession">Cerrar Session</button>
+  </div>
+
   <div class="container p-3">
 
     <div class="row">
@@ -70,18 +75,13 @@
 
       </div>
       <div class="col-md-8">
-
-
         <div class="card">
-
           <div class="list-group" id="mostrar-boletas">
             <a href="../../" class="list-group-item list-group-item-action" aria-current="true">
               No se han realizado compras aun, <strong>Comprar Ahora</strong>
             </a>
           </div>
-
         </div>
-
       </div>
 
     </div>
