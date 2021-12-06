@@ -21,7 +21,7 @@ const renderLinkBoleta = (boleta, index) => {
             </div>
             <p class="mb-1">Mas detalles.</p>
           </a>`;
-};
+  };
 
 const renderPerfil = ({
   Nombres_Usuario,
@@ -88,16 +88,16 @@ const SavePerfil = () => {
     return;
   }
 
-  if(newInputsAll[1].value.length < 8){
+  if (newInputsAll[1].value.length < 8) {
     infoMessage.textContent = "DNI debe ser minimo 8 caracteres";
     myToast.show();
-    return
+    return;
   }
 
-  if(newInputsAll[1].value.length < 9){
+  if (newInputsAll[2].value.length < 9) {
     infoMessage.textContent = "Telefono debe ser minimo 9 caracteres";
     myToast.show();
-    return
+    return;
   }
 
   let obj = {
@@ -112,21 +112,21 @@ const SavePerfil = () => {
 };
 
 const ApiBoleta = async () => {
-  let url =
-    "http://localhost/TiendaOnlineJulio/api/controllers/BoletaController.php?option=listarBoletasId&idUser=1";
+  let url = `http://localhost/TiendaOnlineJulio/api/controllers/BoletaController.php?option=listarBoletasId&idUser=${SessionParams.ID_Usuario}`;
 
   const response = await fetch(url);
   const boletas = await response.json();
 
   const items = boletas.map((boleta, i) => renderLinkBoleta(boleta, i + 1));
-  const template = "<li class='list-group-item text-white bg-dark'>Mis Boletas</li>" + items.join(" ");
+  const template =
+    "<li class='list-group-item text-white bg-dark'>Mis Boletas</li>" +
+    items.join(" ");
 
   mostrarBoletas.innerHTML = template;
 };
 
 const ApiPerfil = async () => {
-  let url =
-    "http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=perfil&idUser=1";
+  let url = `http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=perfil&idUser=${SessionParams.ID_Usuario}`;
 
   const response = await fetch(url);
   const perfil = await response.json();
@@ -135,7 +135,7 @@ const ApiPerfil = async () => {
 };
 
 const ApiSendPerfil = async (object) => {
-  let url = "http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=updateAllData&id=1";
+  let url = `http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=updateAllData&id=${SessionParams.ID_Usuario}`;
   const response = await fetch(url, {
     method: "POST",
     body: JSON.stringify(object),
@@ -151,11 +151,16 @@ ApiBoleta();
 ApiPerfil();
 
 const ValidacionInputCaracteres = (element, number) => {
-  if (element.value.length > number) element.value = element.value.slice(0, number);
+  if (element.value.length > number)
+    element.value = element.value.slice(0, number);
 };
 
 editPerfil.addEventListener("click", Edit);
 sendPerfil.addEventListener("click", SavePerfil);
 
-inputsAll[1].addEventListener("input", function(){ValidacionInputCaracteres(this, 8)});
-inputsAll[2].addEventListener("input", function(){ValidacionInputCaracteres(this, 9)});
+inputsAll[1].addEventListener("input", function () {
+  ValidacionInputCaracteres(this, 8);
+});
+inputsAll[2].addEventListener("input", function () {
+  ValidacionInputCaracteres(this, 9);
+});

@@ -71,7 +71,7 @@ function VerificarUsuario()
   $user = $reg->All();
   if ($user !== null) {
     http_response_code(200);
-    echo json_encode($user);
+    echo json_encode($user[0]);
   } else {
     http_response_code(404);
     echo json_encode(['msg' => 'No existe']);

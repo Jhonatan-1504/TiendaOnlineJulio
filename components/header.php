@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="<?php echo constant('URL'); ?>/assets/styles.css">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div hidden data-url><?php echo constant('URL'); ?></div>
   <div class="container-fluid">
     <a class="navbar-brand" href="<?php echo constant('URL'); ?>">Tienda Online</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,7 +18,7 @@
       </ul>
       <div class="d-flex flex-row-reverse">
         <div>
-          <a href="<?php echo constant('URL'); ?>Views/perfil/perfil.php">
+          <a data-checkout-user href="#">
             <img src="<?php echo constant('URL'); ?>assets/usuario.svg" class="set-image m-3" alt="icono usuario">
           </a>
         </div>
