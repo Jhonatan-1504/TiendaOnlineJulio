@@ -94,7 +94,7 @@ function CrearProducto()
 
 // HTTP_POST
 /*
-  http://localhost/TiendaOnlineJulio/api/controllers/ProductoController.php?option=updateProduct&id=1
+  http://localhost/TiendaOnlineJulio/api/controllers/ProductoController.php?option=updateProduct&idProducto=1
   
   FormData
   {
@@ -115,17 +115,20 @@ function ActualizarProducto()
   $datos = [
     "Nombre_Producto" => $request->nombre,
     "Descripcion_Producto" => $request->descripcion,
-    "Imagen_Producto" => $fileName,
     "Stock_Producto" => $request->stock,
     "Precio_Producto" => $request->precio,
     "ID_Empleado" => $request->idEmpleado
   ];
 
+  if (strlen($fileName) && $fileName !== 'Error') {
+    $datos['Imagen_Producto'] = $fileName;
+  }
+
   $reg = new Productos();
-  $reg->Where(["ID_Producto" => $_GET['id']]);
+  $reg->Where(["ID_Producto" => $_GET['idProducto']]);
   $result = $reg->Update($datos);
   if ($result) {
-    echo "Producto actualizado";
+    echo json_encode($datos);
   }
 }
 
@@ -138,8 +141,12 @@ function BorrarProducto()
   $reg = new Productos();
   $reg->Where(["ID_Producto" => $_GET['id']]);
   $result = $reg->Delete();
-  if ($result) {
-    echo "Borrado con exito";
+  if ($result->rowCount()) {
+    http_response_code(200);
+    echo json_encode(['msg' => 'Borrado']);
+  } else {
+    http_response_code(404);
+    echo json_encode(["msg" => "Error"]);
   }
 }
 
@@ -147,6 +154,8 @@ function BorrarProducto()
 function SaveFile(string $key, string $dir)
 {
   $directorio = "../../assets/$dir/";
+
+  if (!isset($_FILES[$key]) || $_FILES[$key] === "Error") return "";
 
   $fileName = $_FILES[$key]['name'];
   $fileSave = $_FILES[$key]['tmp_name'];
