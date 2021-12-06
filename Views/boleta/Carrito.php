@@ -15,16 +15,28 @@
   <?php include_once "../../api/config/config.php"; ?>
   <?php include_once "../../components/header.php"; ?>
 
+  <template id="mensaje-cantidad-limite">
+        <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+            <div class="alert alert-danger" role="alert" style="width: 25rem;">
+                <div class="d-flex justify-content-between">
+                    <h4 class="alert-heading">Stock no permitido!</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <p>Seleciona otra cantidad</p>
+            </div>
+        </div>
+  </template>
+
   <div class="row" style="align-items: center;">
-    <div class="container col-md-7">
+    <div class="container col-md-8">
         <div class="list-group" id="Listar_Productos" style="margin: 5%;align-items: center;">
             <div class="list-group-item active">
                 <h1 >Carrito de Compras</h1>
             </div>           
         </div>
     </div>
-    <div class="container col-md-5">
-      <div class="list-group p-5 m-5" >
+    <div class="container col-md-4">
+      <div class="list-group m-5" >
         <div class="list-group-item">
             <h3 style="font-size: 18px;text-align:center;">Resumen de Compras</h3>
         </div>
@@ -47,36 +59,69 @@
     </div>
   </div>
   <script>
-    const array = [
-      { cantidad: 1, descripcion: "Audifonos:Inalambricos | Marca: apple",idEmpleado: 1,idProducto: 1,imagen: "airpods.webp",nombre: "airpods",precio: "150.00",stock: 10},
-      { cantidad: 2, descripcion: "Audifonos:Inalambricos | Marca: apple| dasdasdasdasdasdasdasdasdqewqwes",idEmpleado: 1,idProducto: 1,imagen: "Televisor LG.webp",nombre: "airpods",precio: "180.00",stock: 10},
-    ];
+    const textproductos = localStorage.getItem("carrito");
+    let jsonproductos = JSON.parse(textproductos);
+    let copiaproductos = [...jsonproductos]
     let subtotal = 0;
-    array.map(function(element) {
+    // document.getElementById('cantidad-stock').max = data.Stock_Producto;
+    const mensajeStock = document.querySelector('#mensaje-cantidad-limite');
+
+    jsonproductos.map(function(element) {
       const div = document.createElement("div")
       const totalprecio = element.cantidad * element.precio;
-      div.style.width = "480px"
       div.innerHTML = `
-        <div class="list-group-item p-5">
+        <form class="list-group-item p-5">
           <div style="display:flex;">
             <img style="width: 100px;" src="../../assets/products/${element.imagen}" alt="" class="card-img-top"/> 
             <div class="p-2" style="display: flex;justify-content: space-between;flex-direction: column;">
-              <h2 style="font-size: 16px;word-break: break-word;">${element.descripcion}</h2>  
-              <div style="display: flex;align-items: center;justify-content: space-between;">
-                <div>
-                  <input type="text" value="${element.cantidad}" size="1" maxlength="1"/>
+              <h2 style="font-size: 16px;word-break: break-word;"><strong>${element.nombre}</strong></h2> 
+              <div style="margin: 10px 0;">
+                Disponibles : ${element.stock}
+              </div> 
+              <div style="display: flex;align-items: center;justify-content: space-between; margin: 10px 0;">
+                  <input id="ProductoCantidad${element.idProducto}" type="text" value="${element.cantidad}" size="4" maxlength="4" onChange="Cambio(${element.idProducto})"/>
                   <span style="color:red;">S/ <strong  id="precio_producto">${totalprecio}</strong></span>
-                </div>
-                <button class="btn btn-dark">Eliminar</button>
+              </div>
+              <div>
+                <button id="Editar${element.idProducto}" class="btn btn-dark" type="submit" onClick="CambiarCantidad(${element.idProducto},${element.stock},event)" disabled>Guardar</button>
+                <button class="btn btn-dark" type="submit" onClick="BorrarDato(${element.idProducto})">Eliminar</button>
               </div>
             </div>
           </div>
-        </div>`;
+        </form>`;
       document.getElementById("Listar_Productos").appendChild(div) 
       subtotal = subtotal + totalprecio
       document.getElementById("subtotal").innerHTML = subtotal;
-
     });
+
+    const Cambio = (idProducto)=>{
+      document.getElementById("Editar"+idProducto).removeAttribute("disabled");
+    }
+    const CambiarCantidad = (idProducto,stock,evt)=>{
+      const nuevacantidad = document.getElementById("ProductoCantidad"+idProducto).value;
+      const producto = copiaproductos.find(element => element.idProducto == idProducto)
+      const index = copiaproductos.indexOf(producto);
+      if(nuevacantidad<stock && nuevacantidad>0){
+        producto.cantidad = nuevacantidad
+        copiaproductos[index] = producto;
+        localStorage.setItem('carrito', JSON.stringify(copiaproductos))
+      }else{
+        evt.preventDefault();
+        var clone = document.importNode(mensajeStock.content, true);
+        return document.body.appendChild(clone);
+      }
+    }
+
+    const BorrarDato = (idProducto)=>{
+      const producto = copiaproductos.find(element => element.idProducto == idProducto)
+      const index = copiaproductos.indexOf(producto);
+      if(index == 0){
+        copiaproductos.shift();
+      }else{
+        copiaproductos.splice(index,1);
+      }
+      localStorage.setItem('carrito', JSON.stringify(copiaproductos))
+    }
 
     const ObtenerTotal =()=>{
       const subtotal = parseInt(document.getElementById("subtotal").textContent);
@@ -84,6 +129,7 @@
       const total = subtotal + Math.round(subtotal * IGV)
       document.getElementById("total").innerHTML = total;
     }
+
     ObtenerTotal();
 
 
