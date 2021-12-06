@@ -37,7 +37,7 @@
               <div class="ms-2 me-auto">
                 <div class="fw-bold">DNI</div>
                 <span class="show-text-span"></span>
-                <input type="text" class="form-control input-perfil visually-hidden">
+                <input type="text" min="1" max="99999999" class="form-control input-perfil visually-hidden">
               </div>
               <span class="badge bg-danger rounded-pill intorregation" title="falta el DNI">!</span>
             </li>

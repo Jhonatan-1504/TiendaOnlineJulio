@@ -38,13 +38,15 @@ const renderPerfil = ({
     }
   };
 
-  let fullName = `${Nombres_Usuario ? Nombres_Usuario + ", ": ""}${Apellidos_Usuario? Apellidos_Usuario: ""}`;
+  let fullName = `${Nombres_Usuario ? Nombres_Usuario + ", " : ""}${
+    Apellidos_Usuario ? Apellidos_Usuario : ""
+  }`;
 
   renderItem(spanAll[0], fullName, 0);
   renderItem(spanAll[1], DNI_Usuario ? DNI_Usuario : "", 1);
   renderItem(spanAll[2], Telefono_Usuario ? Telefono_Usuario : "", 2);
   renderItem(spanAll[3], Email_Usuario ? Email_Usuario : "", 3);
-  showUserMSG.textContent = "Hola, " + Email_Usuario
+  showUserMSG.textContent = "Hola, " + Email_Usuario;
 };
 
 const Edit = () => {
@@ -86,6 +88,18 @@ const SavePerfil = () => {
     return;
   }
 
+  if(newInputsAll[1].value.length < 8){
+    infoMessage.textContent = "DNI debe ser minimo 8 caracteres";
+    myToast.show();
+    return
+  }
+
+  if(newInputsAll[1].value.length < 9){
+    infoMessage.textContent = "Telefono debe ser minimo 9 caracteres";
+    myToast.show();
+    return
+  }
+
   let obj = {
     nombre: NombreCompleto[0],
     apellido: NombreCompleto[1],
@@ -105,9 +119,7 @@ const ApiBoleta = async () => {
   const boletas = await response.json();
 
   const items = boletas.map((boleta, i) => renderLinkBoleta(boleta, i + 1));
-  const template =
-    "<li class='list-group-item text-white bg-dark'>Mis Boletas</li>" +
-    items.join(" ");
+  const template = "<li class='list-group-item text-white bg-dark'>Mis Boletas</li>" + items.join(" ");
 
   mostrarBoletas.innerHTML = template;
 };
@@ -123,14 +135,13 @@ const ApiPerfil = async () => {
 };
 
 const ApiSendPerfil = async (object) => {
-  let url =
-    "http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=updateAllData&id=1";
+  let url = "http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=updateAllData&id=1";
   const response = await fetch(url, {
     method: "POST",
     body: JSON.stringify(object),
   });
-  if(response.status === 200 ){
-    console.log('Actualizado');
+  if (response.status === 200) {
+    console.log("Actualizado");
   }
   EsconderInputs();
   ApiPerfil();
@@ -139,5 +150,12 @@ const ApiSendPerfil = async (object) => {
 ApiBoleta();
 ApiPerfil();
 
+const ValidacionInputCaracteres = (element, number) => {
+  if (element.value.length > number) element.value = element.value.slice(0, number);
+};
+
 editPerfil.addEventListener("click", Edit);
 sendPerfil.addEventListener("click", SavePerfil);
+
+inputsAll[1].addEventListener("input", function(){ValidacionInputCaracteres(this, 8)});
+inputsAll[2].addEventListener("input", function(){ValidacionInputCaracteres(this, 9)});
