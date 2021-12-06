@@ -70,7 +70,7 @@
         mesaWar.classList.remove("d-none");
       } else {
         let data = await response.json();
-        localStorage.setItem('session',JSON.stringify(data))
+        await localStorage.setItem('session',JSON.stringify(data))
         window.location.href = "../../index.php"
       };
 

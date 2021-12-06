@@ -24,60 +24,59 @@
             <div class="col-md-4">
 
                 <div class="position-relative">
-                    <div class="position-fixed" style="width: 26rem;">
-                        <div class="card mb-2">
-                            <form id="frmProducto">
-                                <ol class="list-group">
-                                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold">Nombre del producto: </div>
-                                            <span class="show-text-span"></span>
-                                            <input name="nombre" type="text" class="form-control input-perfil visually-hidden" required>
-                                        </div>
-                                        <span class="badge bg-danger rounded-pill intorregation" title="Falta el Nombre del producto">!</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold">Descripción del Producto: </div>
-                                            <span class="show-text-span"></span>
-                                            <textarea name="descripcion" class="form-control input-perfil visually-hidden" required></textarea>
-                                        </div>
-                                        <span class="badge bg-danger rounded-pill intorregation" title="Falta la Descripción del Producto">!</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold">Imagen Producto: </div>
-                                            <span class="show-text-span"></span>
-                                            <input name="imagen" type="file" class="form-control input-perfil visually-hidden">
-                                        </div>
-                                        <span class="badge bg-danger rounded-pill intorregation" title="Falta la Imagen del Producto">!</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold">Stock del producto: </div>
-                                            <span class="show-text-span"></span>
-                                            <input name="stock" type="number" class="form-control input-perfil visually-hidden" required>
-                                        </div>
-                                        <span class="badge bg-danger rounded-pill intorregation" title="Falta el Stock del Producto">!</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold">Precio del producto: </div>
-                                            <span class="show-text-span"></span>
-                                            <input name="precio" type="number" class="form-control input-perfil visually-hidden" required>
-                                        </div>
-                                        <span class="badge bg-danger rounded-pill intorregation" title="Falta el Precio del Producto">!</span>
-                                    </li>
-                                </ol>
 
-                                <div class="card-footer">
-                                    <div class="d-flex gap-2 justify-content-between align-items-start">
-                                        <button type="button" id="editProducto" class="btn btn-light border border-dark">Agregar Producto</button>
-                                        <button type="submit" id="sendProducto" disabled class="btn btn-dark">Guardar</button>
+                    <div class="card mb-2">
+                        <form id="frmProducto">
+                            <ol class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">Nombre del producto: </div>
+                                        <span class="show-text-span"></span>
+                                        <input name="nombre" type="text" class="form-control input-perfil visually-hidden" required>
                                     </div>
+                                    <span class="badge bg-danger rounded-pill intorregation" title="Falta el Nombre del producto">!</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">Descripción del Producto: </div>
+                                        <span class="show-text-span"></span>
+                                        <textarea name="descripcion" class="form-control input-perfil visually-hidden" required></textarea>
+                                    </div>
+                                    <span class="badge bg-danger rounded-pill intorregation" title="Falta la Descripción del Producto">!</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">Imagen Producto: </div>
+                                        <span class="show-text-span"></span>
+                                        <input name="imagen" type="file" class="form-control input-perfil visually-hidden">
+                                    </div>
+                                    <span class="badge bg-danger rounded-pill intorregation" title="Falta la Imagen del Producto">!</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">Stock del producto: </div>
+                                        <span class="show-text-span"></span>
+                                        <input name="stock" type="number" class="form-control input-perfil visually-hidden" required>
+                                    </div>
+                                    <span class="badge bg-danger rounded-pill intorregation" title="Falta el Stock del Producto">!</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">Precio del producto: </div>
+                                        <span class="show-text-span"></span>
+                                        <input name="precio" type="number" class="form-control input-perfil visually-hidden" required>
+                                    </div>
+                                    <span class="badge bg-danger rounded-pill intorregation" title="Falta el Precio del Producto">!</span>
+                                </li>
+                            </ol>
+
+                            <div class="card-footer">
+                                <div class="d-flex gap-2 justify-content-between align-items-start">
+                                    <button type="button" id="editProducto" class="btn btn-light border border-dark">Agregar Producto</button>
+                                    <button type="submit" id="sendProducto" disabled class="btn btn-dark">Guardar</button>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
 

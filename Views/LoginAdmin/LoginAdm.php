@@ -75,7 +75,11 @@
          if(response.status != 200){
             const mesaWar = document.getElementById("mesa-war");
             mesaWar.classList.remove("d-none");
-         }else return window.location.href = "../../index.php";
+         }else{
+            let data = await response.json();
+            await localStorage.setItem('session',JSON.stringify(data))
+            window.location.href = "../../Views/HomeAdmin/HomeAdmin.php"
+         };
 
     }
     </script>
