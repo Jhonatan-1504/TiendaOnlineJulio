@@ -28,7 +28,7 @@ switch ($option) {
 
 // HTTP_GET
 /*
-  http://localhost/TiendaOnlineJulio/api/controllers/DetalleBoletaController.php?option=listarDetallesId&idBoleta=1
+  http://localhost/TiendaOnlineJulio/api/controllers/DetalleBoletaController.php?option=listarDetallesId&idBoleta=42423453tetgdrgd
 */
 function BuscarDetallesBoletaId()
 {
@@ -40,7 +40,30 @@ function BuscarDetallesBoletaId()
 
 // HTTP_POST
 /*
-  http://localhost/TiendaOnlineJulio/api/controllers/DetalleBoletaController.php?option=addDetalles&idUser=1
+  http://localhost/TiendaOnlineJulio/api/controllers/DetalleBoletaController.php?option=addDetalles
+
+  {
+    "products":[
+      {
+        "idProduct":"1",
+        "count":"1",
+        "price":"15.20"
+      },
+      {
+        "idProduct":"2",
+        "count":"2",
+        "price":"55.90"
+      },
+      {
+        "idProduct":"3",
+        "count":"1",
+        "price":"25.20"
+      }
+    ],
+    "total":3,
+    "idUser":1
+  }
+
 */
 function AgregarDetallesBoletaAndBoleta()
 {
@@ -51,8 +74,22 @@ function AgregarDetallesBoletaAndBoleta()
 
   $idBoleta = uniqid() . uniqid();
 
-  // sendBoleta
+  $resultBoleta = $boleta->Create(["ID_Boleta" => $idBoleta, "ID_Usuario" => $request->idUser], 2);
+  
+  for ($i = 0; $i < $request->total; $i++) {
+    $detalles->Create([
+      "ID_Boleta" => $idBoleta,
+      "Cantidad" => $request->products[$i]->count,
+      "Final_Total" => $request->products[$i]->price,
+      "ID_Producto" => $request->products[$i]->idProduct
+    ], 4);
+  }
 
-  // sendDetalleBoleta
-  echo json_encode($request->products);
+  if ($resultBoleta->rowCount()) {
+    http_response_code(200);
+    echo json_encode(["msg" => "Agregado con exito"]);
+  } else {
+    http_response_code(404);
+    echo json_encode(["msg" => "Enviaste mal algo"]);
+  }
 }
