@@ -17,11 +17,12 @@
   <?php include_once "../../api/config/config.php"; ?>
   <?php include_once "../../components/header.php"; ?>
 
-  <div class="d-flex justify-content-between bg-dark text-white p-3 position-relative" style="height: 10rem;">
+  <div class="d-flex justify-content-between bg-dark text-white p-3 position-relative" style="height: 15rem;">
     <h1>Detalle de Boleta</h1>
     <div class="d-flex flex-column align-items-end justify-content-end">
-      <h2 id="Total">S/.200</h2>
-      <h6 id="fecha_compra"></h6>
+      <div class="fs-1" id="Total"></div>
+      <div><span class="text-muted fs-6">IGV(18%)</span> <span class="fs-3" id="igv"></span> </div>
+      <div id="fecha_compra" class="pt-2 fs-6"></div>
     </div>
   </div>
 
@@ -62,7 +63,8 @@
         finaltotal = finaltotal + parseInt(element.Precio_Producto)
       });
 
-      document.getElementById("Total").innerHTML = "S/. "+ (finaltotal + finaltotal * 0.18);
+      document.getElementById("Total").innerHTML = "S/. " + (finaltotal + finaltotal * 0.18);
+      document.getElementById("igv").textContent = `S/. ${finaltotal * 0.18}`;
     }
     ApiProduct()
   </script>
