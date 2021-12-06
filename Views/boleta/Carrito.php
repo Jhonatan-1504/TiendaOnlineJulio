@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="container col-md-4">
-      <div class="list-group m-5" >
+      <form method="POST" class="list-group m-5">
         <div class="list-group-item">
             <h3 style="font-size: 18px;text-align:center;">Resumen de Compras</h3>
         </div>
@@ -53,46 +53,52 @@
           Total a pagar <span style="color:red;">S/ <strong id="total"></strong></span>
         </div>
         <div class="list-group-item">
-            <button class="btn btn-dark" style="width: 100%;" type="submit">Finalizar Compra</button>
+            <button class="btn btn-dark" style="width: 100%;" type="button" onClick="FinalizarCompra()">Finalizar Compra</button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
   <script>
+    console.log( localStorage.getItem("carrito"))
     const textproductos = localStorage.getItem("carrito");
-    let jsonproductos = JSON.parse(textproductos);
+    let jsonproductos = (textproductos == null) ? []: JSON.parse(textproductos);
     let copiaproductos = [...jsonproductos]
     let subtotal = 0;
-    // document.getElementById('cantidad-stock').max = data.Stock_Producto;
     const mensajeStock = document.querySelector('#mensaje-cantidad-limite');
+    const div = document.createElement("div")
 
-    jsonproductos.map(function(element) {
-      const div = document.createElement("div")
-      const totalprecio = element.cantidad * element.precio;
-      div.innerHTML = `
-        <form class="list-group-item p-5">
-          <div style="display:flex;">
-            <img style="width: 100px;" src="../../assets/products/${element.imagen}" alt="" class="card-img-top"/> 
-            <div class="p-2" style="display: flex;justify-content: space-between;flex-direction: column;">
-              <h2 style="font-size: 16px;word-break: break-word;"><strong>${element.nombre}</strong></h2> 
-              <div style="margin: 10px 0;">
-                Disponibles : ${element.stock}
-              </div> 
-              <div style="display: flex;align-items: center;justify-content: space-between; margin: 10px 0;">
-                  <input id="ProductoCantidad${element.idProducto}" type="text" value="${element.cantidad}" size="4" maxlength="4" onChange="Cambio(${element.idProducto})"/>
-                  <span style="color:red;">S/ <strong  id="precio_producto">${totalprecio}</strong></span>
-              </div>
-              <div>
-                <button id="Editar${element.idProducto}" class="btn btn-dark" type="submit" onClick="CambiarCantidad(${element.idProducto},${element.stock},event)" disabled>Guardar</button>
-                <button class="btn btn-dark" type="submit" onClick="BorrarDato(${element.idProducto})">Eliminar</button>
+    if(textproductos.getItem("carrito") == null){
+      div.innerHTML = `<a href="../../">No Tiene productos, Regresar a la página Principal</a>`
+
+    }else{
+      jsonproductos.map(function(element) {
+        const totalprecio = element.cantidad * element.precio;
+        div.innerHTML = `
+          <form class="list-group-item p-5">
+            <div style="display:flex;">
+              <img style="width: 100px;" src="../../assets/products/${element.imagen}" alt="" class="card-img-top"/> 
+              <div class="p-2" style="display: flex;justify-content: space-between;flex-direction: column;">
+                <h2 style="font-size: 16px;word-break: break-word;"><strong>${element.nombre}</strong></h2> 
+                <div style="margin: 10px 0;">
+                  Disponibles : ${element.stock}
+                </div> 
+                <div style="display: flex;align-items: center;justify-content: space-between; margin: 10px 0;">
+                    <input id="ProductoCantidad${element.idProducto}" type="text" value="${element.cantidad}" size="4" maxlength="4" onChange="Cambio(${element.idProducto})"/>
+                    <span style="color:red;">S/ <strong  id="precio_producto">${totalprecio}</strong></span>
+                </div>
+                <div>
+                  <button id="Editar${element.idProducto}" class="btn btn-dark" type="submit" onClick="CambiarCantidad(${element.idProducto},${element.stock},event)" disabled>Guardar</button>
+                  <button class="btn btn-dark" type="submit" onClick="BorrarDato(${element.idProducto})">Eliminar</button>
+                </div>
               </div>
             </div>
-          </div>
-        </form>`;
-      document.getElementById("Listar_Productos").appendChild(div) 
-      subtotal = subtotal + totalprecio
-      document.getElementById("subtotal").innerHTML = subtotal;
-    });
+          </form>`;
+        subtotal = subtotal + totalprecio
+        document.getElementById("subtotal").innerHTML = subtotal;
+        
+      });
+  }
+  document.getElementById("Listar_Productos").appendChild(div) 
 
     const Cambio = (idProducto)=>{
       document.getElementById("Editar"+idProducto).removeAttribute("disabled");
@@ -131,8 +137,37 @@
     }
 
     ObtenerTotal();
-
-
+    const FinalizarCompra=async()=>{
+      const misproductos = jsonproductos.map((element)=>
+        ( 
+          {
+            idProduct: element.idProducto,
+            count: element.cantidad,
+            price: element.precio
+          }
+        )            
+      )
+      let productos = 
+        {
+        products : misproductos,
+        total:jsonproductos.length,
+        idUser:1
+      }
+      await fetch(`http://localhost/TiendaOnlineJulio/api/controllers/DetalleBoletaController.php?option=addDetalles`,
+      {
+        method : 'POST',
+        body: JSON.stringify(productos),
+        headers:{
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => res.json())
+      .catch(error => console.error('Error:', error))
+      .then(response => {
+        localStorage.removeItem("carrito")
+        location.reload(); 
+      })
+    }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
