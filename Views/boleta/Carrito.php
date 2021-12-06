@@ -96,7 +96,9 @@
 
       })
     } else {
+      const div = document.createElement("div")
       div.innerHTML = `<a href="../../">No Tiene productos, Regresar a la página Principal</a>`
+      document.getElementById("Listar_Productos").appendChild(div)
     }
 
 
@@ -133,7 +135,7 @@
       const subtotal = parseInt(document.getElementById("subtotal").textContent);
       const IGV = 0.18;
       const total = subtotal + Math.round(subtotal * IGV)
-      document.getElementById("total").innerHTML = total;
+      document.getElementById("total").innerHTML = isNaN(total)?0:total;
     }
 
     ObtenerTotal();
@@ -148,7 +150,7 @@
       let productos = {
         products: misproductos,
         total: jsonproductos.length,
-        idUser: 1
+        idUser: SessionParams.ID_Usuario
       }
       await fetch(`http://localhost:8080/TiendaOnlineJulio/api/controllers/DetalleBoletaController.php?option=addDetalles`, {
           method: 'POST',
