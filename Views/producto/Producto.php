@@ -113,7 +113,7 @@
         }
 
         const ApiProduct = async () => {
-            const response = await fetch(`http://localhost:8080/TiendaOnlineJulio/api/controllers/ProductoController.php?option=editProduct&idProducto=${idProducto}`)
+            const response = await fetch(`http://localhost/TiendaOnlineJulio/api/controllers/ProductoController.php?option=editProduct&idProducto=${idProducto}`)
             const data = await response.json();
             producto = data
             renderProducto(data);

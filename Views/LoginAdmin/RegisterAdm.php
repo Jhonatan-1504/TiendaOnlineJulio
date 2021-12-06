@@ -73,7 +73,7 @@
     let Iscorrect = Validate();
     if(Iscorrect){
         let MisDatos = new FormData(Form);
-        await fetch('http://localhost:8080/TiendaOnlineJulio/api/controllers/EmpleadoController.php?option=addUser',{method:"POST",body:MisDatos});
+        await fetch('http://localhost/TiendaOnlineJulio/api/controllers/EmpleadoController.php?option=addUser',{method:"POST",body:MisDatos});
         window.location.href = "../../index.php";
     }else{
       const mesaWar = document.getElementById("mesa-war");

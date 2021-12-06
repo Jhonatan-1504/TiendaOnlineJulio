@@ -152,7 +152,8 @@
         total: jsonproductos.length,
         idUser: SessionParams.ID_Usuario
       }
-      await fetch(`http://localhost:8080/TiendaOnlineJulio/api/controllers/DetalleBoletaController.php?option=addDetalles`, {
+
+      await fetch(`http://localhost/TiendaOnlineJulio/api/controllers/DetalleBoletaController.php?option=addDetalles`, {
           method: 'POST',
           body: JSON.stringify(productos),
           headers: {
