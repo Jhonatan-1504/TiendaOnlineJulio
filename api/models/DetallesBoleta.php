@@ -7,6 +7,7 @@ class DetalleBoleta
   private $where;
   private $array;
   private $select = "*";
+  private $inner = "";
 
   function __construct()
   {
@@ -29,7 +30,10 @@ class DetalleBoleta
 
   function All()
   {
-    $query = "SELECT $this->select FROM $this->table $this->where";
+    $query = "SELECT $this->select FROM $this->table $this->inner $this->where";
+
+    return $query;
+
     $sentence = $this->db->connect()->query($query);
     $sentence->execute();
 
@@ -38,6 +42,10 @@ class DetalleBoleta
     }
 
     return $this->array;
+  }
+
+  function Inner(string $table,string $idTable, string $short = "t2"){
+    
   }
 
   function Create($miArray, $CountToSet)
@@ -57,7 +65,7 @@ class DetalleBoleta
   {
     $key = key($condicional);
     $value = $condicional[$key];
-    $this->where = "WHERE $key = '$value'";
+    $this->where = "WHERE $this->table.$key = '$value'";
   }
 
   function Update($miarray)

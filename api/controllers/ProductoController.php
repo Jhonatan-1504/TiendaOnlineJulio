@@ -17,6 +17,9 @@ include_once "../models/database.php";
 include_once "../models/Productos.php";
 
 switch ($option) {
+  case "listProduct":
+    LIstarProduct();
+    break;
   case "editProduct":
     BuscarProductoId();
     break;
@@ -29,6 +32,16 @@ switch ($option) {
   case "deleteProduct":
     BorrarProducto();
     break;
+}
+
+// HTTP_GET
+/*
+  http://localhost/TiendaOnlineJulio/api/controllers/ProductoController.php?option=listProduct
+*/
+function LIstarProduct()
+{
+  $reg = new Productos();
+  echo json_encode($reg->All());
 }
 
 // HTTP_GET
