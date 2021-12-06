@@ -14,7 +14,7 @@ const showUserMSG = document.querySelector(".info-msg-user");
 const infoMessage = document.querySelector(".info-msg-text");
 
 const renderLinkBoleta = (boleta, index) => {
-  return `<a href="../boleta/Boleta.php?idBoleta=${boleta.ID_Boleta}&idUser=${boleta.ID_Usuario}" class="list-group-item list-group-item-action" aria-current="true">
+  return `<a href="../boleta/Boleta.php?idBoleta=${boleta.ID_Boleta}&idUser=${boleta.ID_Usuario}&date=${boleta.Fecha_Compra}" class="list-group-item list-group-item-action" aria-current="true">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">N°${index}</h5>
               <small>${boleta.Fecha_Compra}</small>
