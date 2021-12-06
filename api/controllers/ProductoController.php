@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($_GET['option'])) {
-  echo "<h1>No tienes permitido entrar a esta pagina</h1> <a href='http://localhost/TiendaOnlineJulio/'>Volver al Menu</a>";
+  echo "<h1>No tienes permitido entrar a esta pagina</h1> <a href='http://localhost:8080/TiendaOnlineJulio/'>Volver al Menu</a>";
   die();
 }
 
@@ -36,7 +36,7 @@ switch ($option) {
 
 // HTTP_GET
 /*
-  http://localhost/TiendaOnlineJulio/api/controllers/ProductoController.php?option=listProduct
+  http://localhost:8080/TiendaOnlineJulio/api/controllers/ProductoController.php?option=listProduct
 */
 function LIstarProduct()
 {
@@ -46,7 +46,7 @@ function LIstarProduct()
 
 // HTTP_GET
 /*
-  http://localhost/TiendaOnlineJulio/api/controllers/ProductoController.php?option=editProduct&idProducto=1
+  http://localhost:8080/TiendaOnlineJulio/api/controllers/ProductoController.php?option=editProduct&idProducto=1
 */
 function BuscarProductoId()
 {
@@ -57,7 +57,7 @@ function BuscarProductoId()
 
 // HTTP_POST
 /*
-  http://localhost/TiendaOnlineJulio/api/controllers/ProductoController.php?option=addProduct
+  http://localhost:8080/TiendaOnlineJulio/api/controllers/ProductoController.php?option=addProduct
   
   FormData
   {
@@ -94,7 +94,7 @@ function CrearProducto()
 
 // HTTP_POST
 /*
-  http://localhost/TiendaOnlineJulio/api/controllers/ProductoController.php?option=updateProduct&idProducto=1
+  http://localhost:8080/TiendaOnlineJulio/api/controllers/ProductoController.php?option=updateProduct&idProducto=1
   
   FormData
   {
@@ -134,7 +134,7 @@ function ActualizarProducto()
 
 // HTTP_GET
 /*
-  http://localhost/TiendaOnlineJulio/api/controllers/ProductoController.php?option=deleteProduct&id=1
+  http://localhost:8080/TiendaOnlineJulio/api/controllers/ProductoController.php?option=deleteProduct&id=1
 */
 function BorrarProducto()
 {

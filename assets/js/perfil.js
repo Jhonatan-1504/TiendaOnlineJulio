@@ -120,7 +120,7 @@ const SavePerfil = () => {
 };
 
 const ApiBoleta = async () => {
-  let url = `http://localhost/TiendaOnlineJulio/api/controllers/BoletaController.php?option=listarBoletasId&idUser=${SessionParams.ID_Usuario}`;
+  let url = `http://localhost:8080/TiendaOnlineJulio/api/controllers/BoletaController.php?option=listarBoletasId&idUser=${SessionParams.ID_Usuario}`;
 
   const response = await fetch(url);
   const boletas = await response.json();
@@ -134,7 +134,7 @@ const ApiBoleta = async () => {
 };
 
 const ApiPerfil = async () => {
-  let url = `http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=perfil&idUser=${SessionParams.ID_Usuario}`;
+  let url = `http://localhost:8080/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=perfil&idUser=${SessionParams.ID_Usuario}`;
 
   const response = await fetch(url);
   const perfil = await response.json();
@@ -144,7 +144,7 @@ const ApiPerfil = async () => {
 };
 
 const ApiSendPerfil = async (object) => {
-  let url = `http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=updateAllData&id=${SessionParams.ID_Usuario}`;
+  let url = `http://localhost:8080/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=updateAllData&id=${SessionParams.ID_Usuario}`;
   const response = await fetch(url, {
     method: "POST",
     body: JSON.stringify(object),

@@ -94,7 +94,7 @@ const BuildCardProducto = () => {
 
 const ApiProducto = async () => {
   let url =
-    "http://localhost/TiendaOnlineJulio/api/controllers/ProductoController.php?option=listProduct";
+    "http://localhost:8080/TiendaOnlineJulio/api/controllers/ProductoController.php?option=listProduct";
   const response = await fetch(url);
   const data = await response.json();
   products = data;
@@ -102,7 +102,7 @@ const ApiProducto = async () => {
 };
 
 const ApiUpdateProducto = async (id, data) => {
-  let url = `http://localhost/TiendaOnlineJulio/api/controllers/ProductoController.php?option=updateProduct&idProducto=${id}`;
+  let url = `http://localhost:8080/TiendaOnlineJulio/api/controllers/ProductoController.php?option=updateProduct&idProducto=${id}`;
   const response = await fetch(url, { method: "POST", body: data });
 
   if (response.status === 200) {
@@ -114,7 +114,7 @@ const ApiUpdateProducto = async (id, data) => {
 };
 
 const ApiDeleteProducto = async (id) => {
-  let url = `http://localhost/TiendaOnlineJulio/api/controllers/ProductoController.php?option=deleteProduct&id=${id}`;
+  let url = `http://localhost:8080/TiendaOnlineJulio/api/controllers/ProductoController.php?option=deleteProduct&id=${id}`;
   const response = await fetch(url);
   if (response.status === 200) {
     isEdit = false;
@@ -126,7 +126,7 @@ const ApiDeleteProducto = async (id) => {
 
 const ApiSendProducto = async (data) => {
   let url =
-    "http://localhost/TiendaOnlineJulio/api/controllers/ProductoController.php?option=addProduct";
+    "http://localhost:8080/TiendaOnlineJulio/api/controllers/ProductoController.php?option=addProduct";
   const response = await fetch(url, { method: "POST", body: data });
   if (response.status === 200) {
     ApiProducto();
