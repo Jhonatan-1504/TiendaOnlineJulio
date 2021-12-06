@@ -33,7 +33,7 @@ switch ($option) {
 function BuscarDetallesBoletaId()
 {
   $reg = new DetalleBoleta();
-  // $reg->Inner();
+  $reg->Inner('productos', ["ID_Producto", "ID_Producto"], 'p');
   $reg->Where(['ID_Boleta' => $_GET['idBoleta']]);
   echo json_encode($reg->All());
 }
@@ -42,7 +42,8 @@ function BuscarDetallesBoletaId()
 /*
   http://localhost/TiendaOnlineJulio/api/controllers/DetalleBoletaController.php?option=addDetalles&idUser=1
 */
-function AgregarDetallesBoletaAndBoleta(){
+function AgregarDetallesBoletaAndBoleta()
+{
   $request = json_decode(file_get_contents("php://input"));
 
   $boleta = new Boleta();
@@ -54,5 +55,4 @@ function AgregarDetallesBoletaAndBoleta(){
 
   // sendDetalleBoleta
   echo json_encode($request->products);
-   
 }

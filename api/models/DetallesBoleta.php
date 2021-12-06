@@ -32,8 +32,6 @@ class DetalleBoleta
   {
     $query = "SELECT $this->select FROM $this->table $this->inner $this->where";
 
-    return $query;
-
     $sentence = $this->db->connect()->query($query);
     $sentence->execute();
 
@@ -44,8 +42,8 @@ class DetalleBoleta
     return $this->array;
   }
 
-  function Inner(string $table,string $idTable, string $short = "t2"){
-    
+  function Inner(string $table,array $array, string $short = "t2"){
+    $this->inner .= "INNER JOIN $table $short ON $short.$array[0] = $this->table.$array[1] ";
   }
 
   function Create($miArray, $CountToSet)
