@@ -25,17 +25,22 @@
     </div>
   </div>
 
-  <div class="container mt-3">
+  <div class="container mt-3" style="text-align: center;">
     <div class="d-flex row border border-1 border-dark bg-dark text-white">
-      <div class="col-10 p-2">Detalles</div>
+      <div class="col-8 p-2">Detalles</div>
+      <div class="col-2 p-2">Cantidad</div>
       <div class="col-2 p-2">Precio</div>
     </div>
-    <div class="d-flex row border border-1">
-      <div class="col-10 border-end p-2">
-        <img src="../../assets/products/airpods.webp" class="" alt="">
+    <div class="d-flex row border border-1" style="font-size: 1.5rem;">
+      <div class="col-8 border-end p-2 justify-content-center d-flex">
+        <img src="../../assets/products/airpods.webp" class="" alt="" style="max-width:15%;min-width: 53px;">
+        <div class="d-flex align-items-center">Lorem ipsum dolor sit amet</div>
       </div>
-      <div class="col-2 p-2">
-        S/.200
+      <div class="col-2 border-end p-2 d-flex align-items-center justify-content-center">
+        1
+      </div>
+      <div class="col-2 p-2 text-bold d-flex align-items-center justify-content-center">
+        <strong>S/.200</strong>
       </div>
     </div>
   </div>
