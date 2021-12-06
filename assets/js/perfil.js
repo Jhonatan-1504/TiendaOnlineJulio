@@ -99,7 +99,7 @@ const SavePerfil = () => {
 
 const ApiBoleta = async () => {
   let url =
-    "http://localhost:8080/TiendaOnlineJulio/api/controllers/BoletaController.php?option=listarBoletasId&idUser=1";
+    "http://localhost/TiendaOnlineJulio/api/controllers/BoletaController.php?option=listarBoletasId&idUser=1";
 
   const response = await fetch(url);
   const boletas = await response.json();
@@ -114,7 +114,7 @@ const ApiBoleta = async () => {
 
 const ApiPerfil = async () => {
   let url =
-    "http://localhost:8080/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=perfil&idUser=1";
+    "http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=perfil&idUser=1";
 
   const response = await fetch(url);
   const perfil = await response.json();
@@ -124,7 +124,7 @@ const ApiPerfil = async () => {
 
 const ApiSendPerfil = async (object) => {
   let url =
-    "http://localhost:8080/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=updateAllData&id=1";
+    "http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=updateAllData&id=1";
   const response = await fetch(url, {
     method: "POST",
     body: JSON.stringify(object),
