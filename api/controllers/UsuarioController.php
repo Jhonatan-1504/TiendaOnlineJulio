@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($_GET['option'])) {
-  echo "<h1>No tienes permitido entrar a esta pagina</h1> <a href='http://localhost/TiendaOnlineJulio/'>Volver al Menu</a>";
+  echo "<h1>No tienes permitido entrar a esta pagina</h1> <a href='http://localhost:8080/TiendaOnlineJulio/'>Volver al Menu</a>";
   die();
 }
 
