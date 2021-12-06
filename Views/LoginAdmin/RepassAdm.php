@@ -76,7 +76,7 @@
         event.preventDefault();
         let MisDatos = new FormData(Form);
         let response = await fetch(
-            'http://localhost/TiendaOnlineJulio/api/controllers/EmpleadoController.php?option=updatePassword', {
+            'http://localhost:8080/TiendaOnlineJulio/api/controllers/EmpleadoController.php?option=updatePassword', {
                 method: "POST",
                 body: MisDatos
             });

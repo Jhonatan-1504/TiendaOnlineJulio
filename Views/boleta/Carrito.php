@@ -65,10 +65,10 @@
     let copiaproductos = [...jsonproductos]
     let subtotal = 0;
     const mensajeStock = document.querySelector('#mensaje-cantidad-limite');
-    const div = document.createElement("div")
 
     if (jsonproductos.length) {
       jsonproductos.map(function(element) {
+        const div = document.createElement("div")
         const totalprecio = element.cantidad * element.precio;
         div.innerHTML = `
           <form class="list-group-item p-5">
@@ -92,13 +92,13 @@
           </form>`;
         subtotal = subtotal + totalprecio
         document.getElementById("subtotal").innerHTML = subtotal;
+        document.getElementById("Listar_Productos").appendChild(div)
 
       })
     } else {
       div.innerHTML = `<a href="../../">No Tiene productos, Regresar a la página Principal</a>`
     }
 
-    document.getElementById("Listar_Productos").appendChild(div)
 
     const Cambio = (idProducto) => {
       document.getElementById("Editar" + idProducto).removeAttribute("disabled");
@@ -150,7 +150,7 @@
         total: jsonproductos.length,
         idUser: 1
       }
-      await fetch(`http://localhost/TiendaOnlineJulio/api/controllers/DetalleBoletaController.php?option=addDetalles`, {
+      await fetch(`http://localhost:8080/TiendaOnlineJulio/api/controllers/DetalleBoletaController.php?option=addDetalles`, {
           method: 'POST',
           body: JSON.stringify(productos),
           headers: {

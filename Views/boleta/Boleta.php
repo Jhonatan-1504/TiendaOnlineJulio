@@ -40,7 +40,7 @@
       const idBoleta = url.searchParams.get("idBoleta");
       const fechacompra = url.searchParams.get("date");
       document.getElementById("fecha_compra").textContent =  fechacompra
-      const response = await fetch(`http://localhost/TiendaOnlineJulio/api/controllers/DetalleBoletaController.php?option=listarDetallesId&idBoleta=${idBoleta}`)
+      const response = await fetch(`http://localhost:8080/TiendaOnlineJulio/api/controllers/DetalleBoletaController.php?option=listarDetallesId&idBoleta=${idBoleta}`)
       const data = await response.json();
       data.map(function(element){
       const div = document.createElement("div")

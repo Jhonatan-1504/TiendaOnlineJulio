@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($_GET['option'])) {
-  echo "<h1>No tienes permitido entrar a esta pagina</h1> <a href='http://localhost/TiendaOnlineJulio/'>Volver al Menu</a>";
+  echo "<h1>No tienes permitido entrar a esta pagina</h1> <a href='http://localhost:8080/TiendaOnlineJulio/'>Volver al Menu</a>";
   die();
 }
 
@@ -39,7 +39,7 @@ switch ($option) {
 
 // HTTP_GET
 /*
-http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=perfil&idUser=1
+http://localhost:8080/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=perfil&idUser=1
 */
 function BuscarIdUsuario(){
   $reg = new Usuario();
@@ -56,7 +56,7 @@ function BuscarIdUsuario(){
 
 // HTTP_POST
 /*
-http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=verificar
+http://localhost:8080/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=verificar
 {
   "email":'PincheENZO',
   "password":'12345'
@@ -80,7 +80,7 @@ function VerificarUsuario()
 
 // HTTP_POST
 /*
-http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=addUser
+http://localhost:8080/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=addUser
 
 {
     "nameUser":"PincheENZO",
@@ -106,7 +106,7 @@ function CrearNuevoUsuario()
 
 // HTTP_POST
 /*
-http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=updatePassword
+http://localhost:8080/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=updatePassword
 
   {
     "email":"pINCHEeNZO",
@@ -140,7 +140,7 @@ function ActualizarPassword()
 
 // HTTP_POST
 /*
-http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=updateAllData&id=1
+http://localhost:8080/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=updateAllData&id=1
 
   {
     "dni":"87456321",
@@ -178,7 +178,7 @@ function ActualizarAll()
 
 // HTTP_GET
 /*
-http://localhost/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=deleteUser&id=1
+http://localhost:8080/TiendaOnlineJulio/api/controllers/UsuarioController.php?option=deleteUser&id=1
 */
 
 function BorraCuenta()
